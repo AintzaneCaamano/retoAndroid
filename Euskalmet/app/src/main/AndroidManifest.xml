@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Euskalmet">
         <activity
+            android:name=".DetailEspacioNaturalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailMunicipioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityOperaciones"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
