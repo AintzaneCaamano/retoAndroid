@@ -10,43 +10,56 @@
         android:id="@+id/Operac_btnMunicipios"
         android:layout_width="225dp"
         android:layout_height="66dp"
-        android:text="Button"
+        android:text="@string/txt_Municipios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintVertical_bias="0.261" />
 
     <Button
         android:id="@+id/Operac_btnEspacios"
         android:layout_width="225dp"
         android:layout_height="66dp"
-        android:text="Button"
+        android:text="@string/txt_EspaciosNaturales"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.306" />
-
-    <Button
-        android:id="@+id/Operac_btnFavs"
-        android:layout_width="225dp"
-        android:layout_height="66dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.434" />
 
     <Button
         android:id="@+id/Operac_btnTop"
         android:layout_width="225dp"
         android:layout_height="66dp"
-        android:text="Button"
+        android:text="@string/txt_Ranking"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintVertical_bias="0.593" />
+
+    <Button
+        android:id="@+id/Operac_btnFavs"
+        android:layout_width="225dp"
+        android:layout_height="66dp"
+        android:text="@string/txt_Favoritos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.771" />
+
+    <Button
+        android:id="@+id/Operac_changeLang"
+        android:layout_width="117dp"
+        android:layout_height="74dp"
+        android:text="@string/txt_ChangeLang"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
