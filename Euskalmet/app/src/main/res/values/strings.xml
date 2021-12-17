@@ -3,9 +3,14 @@
     <string name="textView_usuario">Usuario: </string>
     <string name="textView_contraseña">Contraseña: </string>
     <string name="switch_rememberMe">Remember me </string>
-    <string name="btn_login">Login </string>
+    <string name="btn_login">Iniciar sesión</string>
     <string name="btn_register">Registrarse </string>
     <string name="textView_Login">Login </string>
     <string name="textView_Register">Register </string>
     <string name="textView_ConfirmarContraseña">Confirmar Contraseña: </string>
+    <string name="txt_Municipios">Municipio</string>
+    <string name="txt_EspaciosNaturales">Espacios naturales</string>
+    <string name="txt_Favoritos">Favoritos</string>
+    <string name="txt_Ranking">Top Ranking</string>
+    <string name="txt_ChangeLang">Cambiar idioma</string>
 </resources>

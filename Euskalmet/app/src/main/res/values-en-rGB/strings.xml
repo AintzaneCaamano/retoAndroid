@@ -10,4 +10,8 @@
     <string name="txt_Favoritos">Favourites</string>
     <string name="txt_Ranking">Top Ranking</string>
     <string name="txt_ChangeLang">Change language</string>
+    <string name="btn_register">Register</string>
+    <string name="textView_ConfirmarContraseña">Confirm Password</string>
+    <string name="textView_Login">Login</string>
+    <string name="textView_Register">Register</string>
 </resources>
