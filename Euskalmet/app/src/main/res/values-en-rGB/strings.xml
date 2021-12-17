@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Euskalmet</string>
+    <string name="textView_usuario">User:</string>
+    <string name="textView_contraseña">Password:</string>
+    <string name="switch_rememberMe">Remember me</string>
+    <string name="btn_login">Log In</string>
+    <string name="txt_Municipios">" Municipality"</string>
+    <string name="txt_EspaciosNaturales">Natural  spaces</string>
+    <string name="txt_Favoritos">Favourites</string>
+    <string name="txt_Ranking">Top Ranking</string>
+</resources>
