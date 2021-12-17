@@ -4,4 +4,8 @@
     <string name="textView_contraseña">Contraseña: </string>
     <string name="switch_rememberMe">Remember me </string>
     <string name="btn_login">Login </string>
+    <string name="btn_register">Registrarse </string>
+    <string name="textView_Login">Login </string>
+    <string name="textView_Register">Register </string>
+    <string name="textView_ConfirmarContraseña">Confirmar Contraseña: </string>
 </resources>
