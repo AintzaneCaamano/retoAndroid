@@ -14,4 +14,10 @@
     <string name="textView_ConfirmarContraseña">Confirm Password</string>
     <string name="textView_Login">Login</string>
     <string name="textView_Register">Register</string>
+    <string name="textView_InfoTitle">Title</string>
+    <string name="textView_buscar">Search:</string>
+    <string name="btn_VolverInfo">Return</string>
+    <string name="btn_provisionalDetail">Details Municipality</string>
+    <string name="btn_provisionalDetailMunicipio">Details Municipality</string>
+    <string name="btn_provisionalDetailEspacioNatural">Details Natural spaces</string>
 </resources>

@@ -13,4 +13,9 @@
     <string name="txt_Favoritos">Favoritos</string>
     <string name="txt_Ranking">Top Ranking</string>
     <string name="txt_ChangeLang">Cambiar idioma</string>
+    <string name="textView_InfoTitle">Titulo </string>
+    <string name="textView_buscar">Buscar: </string>
+    <string name="btn_VolverInfo">Volver </string>
+    <string name="btn_provisionalDetailMunicipio">Detalles Municipio</string>
+    <string name="btn_provisionalDetailEspacioNatural">Detalles Espacio Natural</string>
 </resources>
