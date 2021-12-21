@@ -18,4 +18,8 @@
     <string name="btn_VolverInfo">Volver </string>
     <string name="btn_provisionalDetailMunicipio">Detalles Municipio</string>
     <string name="btn_provisionalDetailEspacioNatural">Detalles Espacio Natural</string>
+    <string name="textView_nombreMunicipio">Munipio X</string>
+    <string name="textView_nombreEspacioNatural">Espacio Natural X</string>
+    <string name="textView_foto">Foto: </string>
+    <string name="btn_hacerFoto">Sacar Foto </string>
 </resources>
