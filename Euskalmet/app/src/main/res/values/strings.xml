@@ -22,4 +22,5 @@
     <string name="textView_nombreEspacioNatural">Espacio Natural X</string>
     <string name="textView_foto">Foto: </string>
     <string name="btn_hacerFoto">Sacar Foto </string>
+    <string name="textView_localizacion">Localizacion: </string>
 </resources>
