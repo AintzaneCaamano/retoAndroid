@@ -18,10 +18,10 @@ public class DetailMunicipioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_municipio);
 
-        textViewNombreMunicipio = findViewById(R.id.textView_NombreEspacioNatural);
-        btnVolverDetailMunicipio = findViewById(R.id.btn_volverDetailEspacioNatural);
+        textViewNombreMunicipio = findViewById(R.id.textView_NombreMunicipio);
+        btnVolverDetailMunicipio = findViewById(R.id.btn_volverDetailMunicipio);
 
-        btnVolverDetailMunicipio.setOnClickListener(new View.OnClickListener() {
+        btnVolverDetailMunicipio .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToInfo = new Intent(DetailMunicipioActivity.this, InfoActivity.class);
