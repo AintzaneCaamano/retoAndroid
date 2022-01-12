@@ -24,4 +24,6 @@
     <string name="textView_foto">Photo:</string>
     <string name="btn_hacerFoto">Take Picture</string>
     <string name="textView_localizacion">"Location: "</string>
+    <string name="OK_LOADING_CONTENT">loading</string>
+    <string name="PRESS_TO_CONTINUE">press to continue...</string>
 </resources>

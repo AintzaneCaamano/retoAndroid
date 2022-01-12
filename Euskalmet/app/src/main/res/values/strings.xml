@@ -23,4 +23,7 @@
     <string name="textView_foto">Foto: </string>
     <string name="btn_hacerFoto">Sacar Foto </string>
     <string name="textView_localizacion">Localizacion: </string>
+
+    <string name="OK_LOADING_CONTENT">cargando</string>
+    <string name="PRESS_TO_CONTINUE">Presiona para continuar...</string>
 </resources>
