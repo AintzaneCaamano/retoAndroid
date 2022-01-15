@@ -26,4 +26,6 @@
 
     <string name="OK_LOADING_CONTENT">cargando</string>
     <string name="PRESS_TO_CONTINUE">Presiona para continuar...</string>
+
+    <string name="btn_enviarServer">Enviar</string>
 </resources>

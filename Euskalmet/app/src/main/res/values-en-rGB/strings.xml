@@ -26,4 +26,5 @@
     <string name="textView_localizacion">"Location: "</string>
     <string name="OK_LOADING_CONTENT">loading</string>
     <string name="PRESS_TO_CONTINUE">press to continue...</string>
+    <string name="btn_enviarServer">Send</string>
 </resources>
