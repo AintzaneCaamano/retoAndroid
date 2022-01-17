@@ -17,8 +17,11 @@ public class LoginActivity extends AppCompatActivity {
     Button btnRegister;
 
     private EditText textField;
+    private EditText usuario;
+    private EditText contraseña;
     private Button button;
     private String message;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +31,22 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnRegister = findViewById(R.id.btn_register);
 
-        textField = (EditText) findViewById(R.id.editText_serverConection);
-        button = (Button) findViewById(R.id.btn_serverSend);
+        usuario  = findViewById(R.id.editText_usuario);
+        contraseña = findViewById(R.id.editText_contraseña);
+        //textField = (EditText) findViewById(R.id.editText_serverConection);
+        //button = (Button) findViewById(R.id.btn_serverSend);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
                 startActivity(goToOperaciones);
+
+                // get the text message on the user and password
+                message = "1/" + usuario.getText().toString() + "/" +  contraseña.getText().toString();
+
+                // start the Thread to connect to server
+                new Thread(new ClientThread(message)).start();
             }
         });
 
@@ -44,19 +55,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent goToRegister = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(goToRegister);
-            }
-        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-
-                // get the text message on the text field
-                message = textField.getText().toString();
-
-                // start the Thread to connect to server
-                new Thread(new ClientThread(message)).start();
-
             }
         });
     }
