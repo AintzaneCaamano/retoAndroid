@@ -36,17 +36,39 @@ public class LoginActivity extends AppCompatActivity {
         //textField = (EditText) findViewById(R.id.editText_serverConection);
         //button = (Button) findViewById(R.id.btn_serverSend);
 
+
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
-                startActivity(goToOperaciones);
-
                 // get the text message on the user and password
                 message = "1/" + usuario.getText().toString() + "/" +  contraseña.getText().toString();
+                 ClientThread clientThread = new ClientThread(message);
 
                 // start the Thread to connect to server
+               /* Thread thread = new Thread(clientThread);
+                // ClientThread  thread = new ClientThread(message);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Envio response = clientThread.getResponse();
+
+
+                if (null == response){
+                    btnLogin.setText("no ha llegado");
+                } else if (response.login) {
+                    Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
+                    startActivity(goToOperaciones);
+                } else {
+                    btnLogin.setText("Error");
+                }
+*/
                 new Thread(new ClientThread(message)).start();
+
             }
         });
 

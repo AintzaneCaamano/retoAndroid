@@ -8,14 +8,21 @@ import java.net.Socket;
 
 public class ClientThread implements Runnable{
 
-    private final String message;
-    private String envio;
+    private String message;
+    //private String envio;
     private Socket client;
     private PrintWriter printwriter;
     private ObjectInputStream objectInputStream;
+    private static Envio envio;
+
 
 
     ClientThread(String message) {
+        this.message = message;
+    }
+    ClientThread() {
+    }
+    public void setMessage(String message){
         this.message = message;
     }
 
@@ -32,17 +39,23 @@ public class ClientThread implements Runnable{
 
 
             printwriter.flush();
-            envio = objectInputStream.readObject();
+            envio = (Envio) objectInputStream.readObject();
+
+            // closing the connection
             printwriter.close();
             objectInputStream.close();
-            // closing the connection
             client.close();
 
-        } catch (IOException e) {
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Envio getResponse() {
+        return envio;
+    }
 
 
-    }
-    }
+}
 
