@@ -1,26 +1,13 @@
 package com.example.euskalmet;
 
-public class Envio {
+import java.io.Serializable;
 
-    String usuario;
-    Boolean login;
+public class Envio implements Serializable {
 
-    public Boolean getLogin() {
-        return login;
-    }
+    private static final long serialVersionUID = 3421362398450973738L;
 
-    public void setLogin(Boolean login) {
-        this.login = login;
-    }
-
-    public Envio(String usuario) {
-        super();
-        this.usuario = usuario;
-    }
-
-    public Envio() {
-        // TODO Auto-generated constructor stub
-    }
+    private String usuario;
+    private Boolean login;
 
     public String getUsuario() {
         return usuario;
@@ -30,4 +17,11 @@ public class Envio {
         this.usuario = usuario;
     }
 
+    public Boolean getLogin() {
+        return login;
+    }
+
+    public void setLogin(Boolean login) {
+        this.login = login;
+    }
 }

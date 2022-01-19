@@ -3,59 +3,57 @@ package com.example.euskalmet;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class ClientThread implements Runnable{
 
-    private String message;
-    //private String envio;
-    private Socket client;
-    private PrintWriter printwriter;
-    private ObjectInputStream objectInputStream;
-    private static Envio envio;
-
-
-
-    ClientThread(String message) {
-        this.message = message;
-    }
-    ClientThread() {
-    }
-    public void setMessage(String message){
-        this.message = message;
-    }
+    private static String HOST = "10.5.7.33";
+    private static int PORT = 5000;
+    private String messageSent;
+    private Envio messageResponse;
 
     @Override
     public void run() {
+        Socket socket = null;
+        ObjectInputStream objectInputStream = null;
+        ObjectOutputStream objectOutputStream = null;
 
         try {
-            // the IP and port should be correct to have a connection established
-            // Creates a stream socket and connects it to the specified port number on the named host.
-            client = new Socket("10.5.7.33", 4444);  // connect to server
-            printwriter = new PrintWriter(client.getOutputStream(),true);
-            objectInputStream = new ObjectInputStream(client.getInputStream());
-            printwriter.write(message);  // write the message to output stream
+            InetAddress serverAddr = InetAddress.getByName(HOST);
+            socket = new Socket(serverAddr, PORT);
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
+            objectOutputStream.writeObject(messageSent);
+            objectOutputStream.flush();
 
-            printwriter.flush();
-            envio = (Envio) objectInputStream.readObject();
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+            messageResponse = (Envio) objectInputStream.readObject();
 
-            // closing the connection
-            printwriter.close();
-            objectInputStream.close();
-            client.close();
-
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (null != objectInputStream)
+                    objectInputStream.close();
+                if (null != objectOutputStream)
+                    objectOutputStream.close();
+                if (null != socket)
+                    socket.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    public static Envio getResponse() {
-        return envio;
+    public void setMessageSent(String messageSent) {
+        this.messageSent = messageSent;
     }
 
-
+    public Envio getMessageResponse() {
+        return messageResponse;
+    }
 }
 
