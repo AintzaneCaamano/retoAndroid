@@ -52,11 +52,16 @@ public class LoginActivity extends AppCompatActivity {
                 // The Answer
                 messageResponse = clientThread.getMessageResponse();
 
-               // messageResponse = messageResponse;
+                if (null == messageResponse){
+                    btnLogin.setText("no ha llegado");
+                } else if (messageResponse.getLogin()) {
+                    Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
+                    startActivity(goToOperaciones);
+                } else if(!messageResponse.getLogin()) {
+                    btnLogin.setText("Error");
+                }
             }
         });
-
-
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
