@@ -34,35 +34,44 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (contraseñaRegister != null && confirmarContraseñaRegister != null) {
+                    if (contraseñaRegister.getText().toString().equals(confirmarContraseñaRegister.getText().toString())) {
 
-                    String messageSent = "2-" + usuarioRegister.getText().toString() + "-" + contraseñaRegister.getText().toString();
-                    Envio messageResponse;
-                    ClientThread clientThread = new ClientThread();
-                    clientThread.setMessageSent(messageSent);
 
-                    Thread thread = new Thread(clientThread);
-                    try {
-                        thread.start();
-                        thread.join();
-                    } catch (InterruptedException e) {
+                        String messageSent = "2-" + usuarioRegister.getText().toString() + "-" + contraseñaRegister.getText().toString();
+                        Envio messageResponse;
+                        ClientThread clientThread = new ClientThread();
+                        clientThread.setMessageSent(messageSent);
 
+                        Thread thread = new Thread(clientThread);
+                        try {
+                            thread.start();
+                            thread.join();
+                        } catch (InterruptedException e) {
+
+                        }
+
+                        // The Answer
+                        messageResponse = clientThread.getMessageResponse();
+
+
+                        if (null == messageResponse) {
+                            btnRegister2.setText("no ha llegado");
+                        } else if (messageResponse.getLogin()) {
+                            Toast register = Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_LONG);
+                            register.show();
+                            Intent goToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(goToLogin);
+                        } else if (!messageResponse.getLogin()) {
+                            btnRegister2.setText("No se ha podido registrar");
+                        }
                     }
-
-                    // The Answer
-                    messageResponse = clientThread.getMessageResponse();
-
-
-                    if (null == messageResponse) {
-                        btnRegister2.setText("no ha llegado");
-                    } else if (messageResponse.getLogin()) {
-                        Toast register = Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_LONG);
-                        register.show();
-                        Intent goToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(goToLogin);
-                    } else if (!messageResponse.getLogin()) {
-                        btnRegister2.setText("No se ha podido registrar");
+                    else {
+                        Toast mismacontra = Toast.makeText(getApplicationContext(), "debes introducir la misma contraseña", Toast.LENGTH_LONG);
+                        mismacontra.show();
                     }
                 }
+            }
         });
     }
 
