@@ -34,8 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (contraseñaRegister != null && confirmarContraseñaRegister != null) {
-                    if (contraseñaRegister.getText().toString().equals(confirmarContraseñaRegister.getText().toString())) {
+                if (contraseñaRegister != null && confirmarContraseñaRegister != null ) {
+                    if (contraseñaRegister.getText().toString().equals(confirmarContraseñaRegister.getText().toString()) && isNumeric(contraseñaRegister.getText().toString())) {
 
 
                         String messageSent = "2-" + usuarioRegister.getText().toString() + "-" + contraseñaRegister.getText().toString();
@@ -67,12 +67,23 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                     else {
-                        Toast mismacontra = Toast.makeText(getApplicationContext(), "debes introducir la misma contraseña", Toast.LENGTH_LONG);
+                        Toast mismacontra = Toast.makeText(getApplicationContext(), "debes introducir la misma contraseña y debe ser numérica", Toast.LENGTH_LONG);
                         mismacontra.show();
                     }
                 }
             }
         });
+    }
+    public boolean isNumeric(String numero){
+        boolean error = false;
+
+        try {
+            Integer.parseInt(numero);
+            error = true;
+        }catch(Exception e){
+            error = false;
+        }
+        return error;
     }
 
 }

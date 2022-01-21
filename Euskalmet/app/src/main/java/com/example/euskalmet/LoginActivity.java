@@ -41,32 +41,42 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get the text message on the user and password
-                String messageSent = "1-" + usuario.getText().toString() + "-" +  contraseña.getText().toString();
-                Envio messageResponse;
-                ClientThread clientThread = new ClientThread();
-                clientThread.setMessageSent(messageSent);
 
-                Thread thread = new Thread( clientThread );
-                try {
-                    thread.start();
-                    thread.join();
-                } catch (InterruptedException e) {
+                if (isNumeric(contraseña.getText().toString()) == false) {
 
-                }
+                    Toast contraseñaInt = Toast.makeText(getApplicationContext(), "la contraseña debe ser numérica", Toast.LENGTH_LONG);
+                    contraseñaInt.show();
 
-                // The Answer
-                messageResponse = clientThread.getMessageResponse();
+                } else {
 
-                if (null == messageResponse){
-                    btnLogin.setText("no ha llegado");
-                } else if (messageResponse.getLogin()) {
-                    Toast login = Toast.makeText(getApplicationContext(), "Se ha logueado correctamente", Toast.LENGTH_LONG);
-                    login.show();
-                    Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
-                    startActivity(goToOperaciones);
-                } else if(!messageResponse.getLogin()) {
-                    btnLogin.setText("Credenciales Incorrectas");
+                    // get the text message on the user and password
+                    String messageSent = "1-" + usuario.getText().toString() + "-" + contraseña.getText().toString();
+                    Envio messageResponse;
+                    ClientThread clientThread = new ClientThread();
+                    clientThread.setMessageSent(messageSent);
+
+                    Thread thread = new Thread(clientThread);
+                    try {
+                        thread.start();
+                        thread.join();
+                    } catch (InterruptedException e) {
+
+                    }
+
+                    // The Answer
+                    messageResponse = clientThread.getMessageResponse();
+
+                    if (null == messageResponse) {
+                        btnLogin.setText("no ha llegado");
+                    } else if (messageResponse.getLogin()) {
+                        Toast login = Toast.makeText(getApplicationContext(), "Se ha logueado correctamente", Toast.LENGTH_LONG);
+                        login.show();
+                        Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
+                        startActivity(goToOperaciones);
+                    } else if (!messageResponse.getLogin()) {
+                        Toast credencialesIncorrectas = Toast.makeText(getApplicationContext(), "credenciales incorrectas", Toast.LENGTH_LONG);
+                        credencialesIncorrectas.show();
+                    }
                 }
             }
         });
@@ -80,5 +90,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public boolean isNumeric(String numero){
+        boolean error = false;
 
+        try {
+            Integer.parseInt(numero);
+            error = true;
+        }catch(Exception e){
+            error = false;
+        }
+        return error;
+    }
 }
