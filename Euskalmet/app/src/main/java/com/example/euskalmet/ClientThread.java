@@ -27,6 +27,7 @@ public class ClientThread implements Runnable{
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
             objectOutputStream.writeObject(messageSent);
+            objectOutputStream.reset();
             objectOutputStream.flush();
 
             objectInputStream = new ObjectInputStream(socket.getInputStream());

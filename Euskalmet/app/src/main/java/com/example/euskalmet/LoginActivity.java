@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // get the text message on the user and password
-                String messageSent = "1/" + usuario.getText().toString() + "/" +  contraseña.getText().toString();
+                String messageSent = "1-" + usuario.getText().toString() + "-" +  contraseña.getText().toString();
                 Envio messageResponse;
                 ClientThread clientThread = new ClientThread();
                 clientThread.setMessageSent(messageSent);
@@ -55,10 +56,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (null == messageResponse){
                     btnLogin.setText("no ha llegado");
                 } else if (messageResponse.getLogin()) {
+                    Toast login = Toast.makeText(getApplicationContext(), "Se ha logueado correctamente", Toast.LENGTH_LONG);
+                    login.show();
                     Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
                     startActivity(goToOperaciones);
                 } else if(!messageResponse.getLogin()) {
-                    btnLogin.setText("Error");
+                    btnLogin.setText("Credenciales Incorrectas");
                 }
             }
         });
