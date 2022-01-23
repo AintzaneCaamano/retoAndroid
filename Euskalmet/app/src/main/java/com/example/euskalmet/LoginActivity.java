@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     Envio messageResponse;
                     ClientThread clientThread = new ClientThread();
                     clientThread.setMessageSent(messageSent);
-
+                    clientThread.setOpcion(1);
                     Thread thread = new Thread(clientThread);
                     try {
                         thread.start();
