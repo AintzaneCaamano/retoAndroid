@@ -1,5 +1,7 @@
 package com.example.euskalmet;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -9,11 +11,14 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class ClientThread implements Runnable{
-
-    private static String HOST = "10.5.7.33";
+    // IP para el emulador de android : 10.0.2.2
+    //Ip para usar el movil como emulador : la del server
+    private static String HOST = "10.0.2.2";
     private static int PORT = 5000;
     private String messageSent;
     private Envio messageResponse;
+    private String messageRecieved;
+    private int opcion = 0 ;
 
     @Override
     public void run() {
@@ -27,14 +32,23 @@ public class ClientThread implements Runnable{
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
             objectOutputStream.writeObject(messageSent);
-            objectOutputStream.reset();
+            //objectOutputStream.reset();
             objectOutputStream.flush();
 
             objectInputStream = new ObjectInputStream(socket.getInputStream());
-            messageResponse = (Envio) objectInputStream.readObject();
+// object = objectInputStream.readObject();
+           switch (opcion) {
+               case 1:
+                   messageResponse = (Envio) objectInputStream.readObject();
+                   break;
+               case 10:
+                   messageRecieved = (String) objectInputStream.readObject();
+                   break;
+           }
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (null != objectInputStream)
@@ -44,7 +58,8 @@ public class ClientThread implements Runnable{
                 if (null != socket)
                     socket.close();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -55,6 +70,12 @@ public class ClientThread implements Runnable{
 
     public Envio getMessageResponse() {
         return messageResponse;
+    }
+    public String getStringResponse(){
+        return messageRecieved;
+    }
+    public void setOpcion(int op){
+      opcion=op;
     }
 }
 
