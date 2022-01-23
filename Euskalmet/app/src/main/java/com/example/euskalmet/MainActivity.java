@@ -32,25 +32,25 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(Integer... params) {
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 progressBar.setProgress(25);
             } catch (InterruptedException e) {
                 // Nothing...
             }
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
                 progressBar.setProgress(50);
             } catch (InterruptedException e) {
                 // Nothing...
             }
             try {
-                Thread.sleep(3000);
+                Thread.sleep(500);
                 progressBar.setProgress(75);
             } catch (InterruptedException e) {
                 // Nothing...
             }
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
                 progressBar.setProgress(100);
             } catch (InterruptedException e) {
                 // Nothing...
