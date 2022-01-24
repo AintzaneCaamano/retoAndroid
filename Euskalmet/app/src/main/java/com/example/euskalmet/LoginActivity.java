@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edTxtPass;
     private Button button;
     private static final String SEPARADOR = "/////";
+    public static String nombre = null;
+    public static int contrasenia = 0;
 
 
     @Override
@@ -65,8 +67,13 @@ public class LoginActivity extends AppCompatActivity {
                     if (null == messageResponse) {
                         btnLogin.setText("no ha llegado");
                     } else if (messageResponse.getLogin()) {
+
+                        nombre = edtxtUser.getText().toString();
+                        contrasenia = Integer.parseInt(edTxtPass.getText().toString());
+
                         Toast login = Toast.makeText(getApplicationContext(), "Se ha logueado correctamente", Toast.LENGTH_LONG);
                         login.show();
+
                         Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
                         startActivity(goToOperaciones);
                     } else if (!messageResponse.getLogin()) {

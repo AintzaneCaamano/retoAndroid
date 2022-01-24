@@ -7,7 +7,7 @@
     tools:context=".InfoActivity">
 
     <ListView
-        android:id="@+id/listView_Info"
+        android:id="@+id/listView_favoritos"
         android:layout_width="365dp"
         android:layout_height="264dp"
         app:layout_constraintBottom_toBottomOf="parent"

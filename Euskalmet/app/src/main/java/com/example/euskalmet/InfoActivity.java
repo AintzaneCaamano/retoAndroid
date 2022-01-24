@@ -36,7 +36,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         textView_InfoTitle = findViewById(R.id.textView_InfoTitle);
-        listViewInfo = findViewById(R.id.listView_Info);
+        listViewInfo = findViewById(R.id.listView_favoritos);
         btnVolverInfo = findViewById(R.id.btn_volverInfo);
         rbtnAlaba = findViewById(R.id.rBtn_Info_Alaba);
         rbtnGuip = findViewById(R.id.rBtn_Info_Gui);
