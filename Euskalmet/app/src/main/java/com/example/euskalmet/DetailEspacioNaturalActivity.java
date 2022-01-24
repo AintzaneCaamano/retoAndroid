@@ -1,6 +1,7 @@
 package com.example.euskalmet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,12 +18,50 @@ import com.example.euskalmet.cliente.ClientThread;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.widget.Toast;
+
+import java.io.IOException;
+
 public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
-    TextView textViewNombreEspacioNatural;
-    Button btnVolverDetailEspacioNatural;
+    private TextView textViewNombreEspacioNatural;
+    private Button btnVolverDetailEspacioNatural;
+    private Button btnHacerFoto;
     private String messageResponse;
+    private ImageView imageViewFoto;
+    private static final int CAMERA_REQUEST = 1;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
+/*  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail_espacio_natural);
 
+        textViewNombreEspacioNatural = findViewById(R.id.textView_NombreEspacioNatural);
+        btnVolverDetailEspacioNatural = findViewById(R.id.btn_volverDetailEspacioNatural);
+        btnHacerFoto = findViewById(R.id.btn_hacerFoto);
+        imageViewFoto = findViewById(R.id.imageViewFoto);
+
+        btnVolverDetailEspacioNatural.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
+                startActivity(goToInfo);
+            }
+        });
+
+        btnHacerFoto.setOnClickListener(v -> {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+            } else {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +70,8 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         textViewNombreEspacioNatural = findViewById(R.id.textView_NombreEspacioNatural);
         btnVolverDetailEspacioNatural = findViewById(R.id.btn_volverDetailEspacioNatural);
         Button btnSacar = findViewById(R.id.btn_hacerFoto);
+        btnHacerFoto = findViewById(R.id.btn_hacerFoto);
+        imageViewFoto = findViewById(R.id.imageViewFoto);
 
     //getImage();
         btnSacar.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +128,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
             thread.start();
             thread.join();
         } catch (InterruptedException e) {
-e.printStackTrace();
+        e.printStackTrace();
         }
 
         // The Answer
@@ -97,5 +138,30 @@ e.printStackTrace();
         Bitmap bmp = BitmapFactory.decodeByteArray(img, 0, img.length);
         ImageView image = findViewById(R.id.imgview_fotoDetalle);
         image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(), image.getHeight(), false));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageViewFoto.setImageBitmap(photo);
+            //para extraer la URI(ruta) de la foto
+            //Uri uri = (Uri) data.getData();
+        }
     }
 }
