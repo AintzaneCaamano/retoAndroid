@@ -9,8 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.euskalmet.cliente.ClientThread;
 
 public class RegisterActivity extends AppCompatActivity {
 

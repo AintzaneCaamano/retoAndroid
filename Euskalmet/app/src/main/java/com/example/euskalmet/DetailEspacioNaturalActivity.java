@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.euskalmet.cliente.ClientThread;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -19,6 +21,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
     TextView textViewNombreEspacioNatural;
     Button btnVolverDetailEspacioNatural;
+    private String messageResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +46,9 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
                 // get the text message on the user and password
                 String messageSent = "9-" + encodedImage;
-                Envio messageResponse;
+
                 ClientThread clientThread = new ClientThread();
+                clientThread.setOption(1);
                 clientThread.setMessageSent(messageSent);
 
                 Thread thread = new Thread(clientThread);
@@ -56,7 +60,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
                 }
 
                 // The Answer
-                messageResponse = clientThread.getMessageResponse();
+                messageResponse = clientThread.getStringResponse();
 
             }
         });
@@ -76,7 +80,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         Envio messageResponse;
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);
-        clientThread.setOpcion(10);
+        clientThread.setOption(3);
         Thread thread = new Thread(clientThread);
 
         try {

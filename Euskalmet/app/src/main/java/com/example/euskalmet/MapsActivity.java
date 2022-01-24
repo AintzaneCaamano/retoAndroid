@@ -22,6 +22,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        loadChords();
+
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -48,5 +50,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng position = new LatLng(latitud, longitud);
         mMap.addMarker(new MarkerOptions().position(position).title("Estacion metereologica"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+    }
+
+    public void loadChords(){
+        Bundle extras = getIntent().getExtras();
+        if (extras.getDouble("lat")>0){
+            latitud = (extras.getDouble("lat"));}
+        if (extras.getDouble("long")>0){
+            longitud =(extras.getDouble("long"));}
     }
 }

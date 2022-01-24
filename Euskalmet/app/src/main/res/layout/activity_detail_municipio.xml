@@ -18,15 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.957" />
 
-    <ListView
-        android:id="@+id/listView_DetailMunicipio"
-        android:layout_width="326dp"
-        android:layout_height="481dp"
+    <Button
+        android:id="@+id/btn_mapaDetailMunicipio2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_VerMapa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84" />
 
     <TextView
         android:id="@+id/textView_NombreMunicipio"
@@ -40,4 +42,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.113" />
+
+    <TextView
+        android:id="@+id/txtVw_DetailMunicipio"
+        android:layout_width="313dp"
+        android:layout_height="294dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.372" />
 </androidx.constraintlayout.widget.ConstraintLayout>

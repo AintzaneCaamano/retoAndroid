@@ -1,14 +1,12 @@
-package com.example.euskalmet;
+package com.example.euskalmet.cliente;
 
-import org.json.JSONObject;
+import com.example.euskalmet.Envio;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientThread implements Runnable{
     // IP para el emulador de android : 10.0.2.2
@@ -16,33 +14,45 @@ public class ClientThread implements Runnable{
     private static String HOST = "10.0.2.2";
     private static int PORT = 5000;
     private String messageSent;
-    private Envio messageResponse;
-    private String messageRecieved;
-    private int opcion = 0 ;
+    private ArrayList<String> receivedArray = new ArrayList();
+    private Envio receivedEnvio;
+    private String receivedString;
+    private int option = 0 ;
+    private ArrayList<Double> receivedArrayDouble;
 
     @Override
     public void run() {
         Socket socket = null;
         ObjectInputStream objectInputStream = null;
         ObjectOutputStream objectOutputStream = null;
-
         try {
             InetAddress serverAddr = InetAddress.getByName(HOST);
             socket = new Socket(serverAddr, PORT);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
 
             objectOutputStream.writeObject(messageSent);
-            //objectOutputStream.reset();
+            objectOutputStream.reset();
             objectOutputStream.flush();
 
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
-// object = objectInputStream.readObject();
-           switch (opcion) {
+
+            // object = objectInputStream.readObject();
+           switch (option) {
                case 1:
-                   messageResponse = (Envio) objectInputStream.readObject();
+                   //recibir un envio
+                   receivedEnvio = (Envio) objectInputStream.readObject();
                    break;
-               case 10:
-                   messageRecieved = (String) objectInputStream.readObject();
+               case 2 :
+                   //Recibir array de Strings
+                   receivedArray = (ArrayList<String>) objectInputStream.readObject();
+                   break;
+               case 3:
+                   //Recibir String
+                   receivedString = (String) objectInputStream.readObject();
+                   break;
+               case 4:
+                   //Recibir array de Double
+                   receivedArrayDouble = (ArrayList<Double>) objectInputStream.readObject();
                    break;
            }
 
@@ -50,6 +60,7 @@ public class ClientThread implements Runnable{
             System.err.println(e.getMessage());
             e.printStackTrace();
         } finally {
+            option = 0 ;
             try {
                 if (null != objectInputStream)
                     objectInputStream.close();
@@ -69,13 +80,22 @@ public class ClientThread implements Runnable{
     }
 
     public Envio getMessageResponse() {
-        return messageResponse;
+        return receivedEnvio;
     }
+
     public String getStringResponse(){
-        return messageRecieved;
+        return receivedString;
     }
-    public void setOpcion(int op){
-      opcion=op;
+
+    public ArrayList<String> getArrayStringResponse(){
+        return receivedArray;
+    }
+
+    public ArrayList<Double> getArrayDouble(){
+        return receivedArrayDouble;
+    }
+    public void setOption(int op){
+      option =op;
     }
 }
 

@@ -5,58 +5,117 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.euskalmet.adapters.AdapterTownList;
+import com.example.euskalmet.cliente.ClientThread;
+
+import java.util.ArrayList;
 
 public class InfoActivity extends AppCompatActivity {
 
-    TextView textView_InfoTitle;
-    TextView textView_buscar;
-    EditText editTextBusqueda;
-    ListView listViewInfo;
-    Button btnVolverInfo;
-    Button btnProvisionalDetailMunicipios;
-    Button btnProvisionalDetailEspacioNatural;
-
+    private TextView textView_InfoTitle;
+    private ListView listViewInfo;
+    private Button btnVolverInfo;
+    private RadioButton rbtnVizcaya;
+    private RadioButton rbtnGuip;
+    private RadioButton rbtnAlaba;
+    private RadioGroup radioGroup;
+    private ArrayList<String> places;
+    private AdapterTownList adapterTownList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
         textView_InfoTitle = findViewById(R.id.textView_InfoTitle);
-        textView_buscar = findViewById(R.id.textView_buscar);
-        editTextBusqueda = findViewById(R.id.editText_busqueda);
         listViewInfo = findViewById(R.id.listView_Info);
         btnVolverInfo = findViewById(R.id.btn_volverInfo);
-        btnProvisionalDetailMunicipios = findViewById(R.id.btn_provisionalDetailMunicipios);
-        btnProvisionalDetailEspacioNatural = findViewById(R.id.btn_provisionalDetailEspacioNatural);
+        rbtnAlaba = findViewById(R.id.rBtn_Info_Alaba);
+        rbtnGuip = findViewById(R.id.rBtn_Info_Gui);
+        rbtnVizcaya=findViewById(R.id.rBtn_info_Viz);
+        radioGroup = findViewById(R.id.rGroupInfo);
+
+
+        loadListFromServer("1");
+        adapterTownList= new AdapterTownList(InfoActivity.this, R.layout.activity_adapter_list, places);
+        listViewInfo.setAdapter(adapterTownList);
+
 
         btnVolverInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToOperaciones = new Intent(InfoActivity.this, ActivityOperaciones.class);
+
                 startActivity(goToOperaciones);
             }
         });
 
-        btnProvisionalDetailMunicipios.setOnClickListener(new View.OnClickListener() {
+        listViewInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent goToDetailMunicipio = new Intent(InfoActivity.this, DetailMunicipioActivity.class);
-                startActivity(goToDetailMunicipio);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intento = new Intent(getApplicationContext(), DetailMunicipioActivity.class);
+                    String place =listViewInfo.getItemAtPosition(position).toString();
+                    intento.putExtra("place", place );
+                startActivity(intento);
+
             }
         });
 
-        btnProvisionalDetailEspacioNatural.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToDetailEspacioNatural = new Intent(InfoActivity.this, DetailEspacioNaturalActivity.class);
-                startActivity(goToDetailEspacioNatural);
-            }
-        });
 
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rBtn_Info_Alaba:
+                if (checked)
+                    loadListFromServer("Araba/Ã�lava");
+                    rearrageAdapter();
+                    break;
+            case R.id.rBtn_Info_Gui:
+                if (checked)
+                    loadListFromServer("Gipuzkoa");
+                     rearrageAdapter();
+                    break;
+            case R.id.rBtn_info_Viz:
+                if (checked)
+                    loadListFromServer("Bizkaia");
+                    rearrageAdapter();
+                    break;
+        }
+    }
+
+    private void rearrageAdapter(){
+        adapterTownList= new AdapterTownList(InfoActivity.this, R.layout.activity_adapter_list, places);
+        listViewInfo.setAdapter(adapterTownList);
+        adapterTownList.notifyDataSetChanged();
+    }
+    private void loadListFromServer(String territory){
+        // get the text message on the user and password
+        String messageSent = "4-" + territory ;
+
+        ClientThread clientThread = new ClientThread();
+        clientThread.setMessageSent(messageSent);
+        clientThread.setOption(2);
+        Thread thread = new Thread(clientThread);
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+
+        }
+
+        // The Answer
+        places = clientThread.getArrayStringResponse();
 
     }
 }
