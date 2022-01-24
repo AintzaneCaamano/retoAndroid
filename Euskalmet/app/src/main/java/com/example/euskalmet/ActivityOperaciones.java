@@ -33,6 +33,7 @@ public class ActivityOperaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent MunicipiosToInfoActivity = new Intent(ActivityOperaciones.this, InfoActivity.class);
+                MunicipiosToInfoActivity.putExtra("origen","municipio");
                 startActivity(MunicipiosToInfoActivity);
             }
         });
@@ -41,6 +42,7 @@ public class ActivityOperaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent EspaciosNatToInfoActivity = new Intent(ActivityOperaciones.this, InfoActivity.class);
+                EspaciosNatToInfoActivity.putExtra("origen","natural");
                 startActivity(EspaciosNatToInfoActivity);
             }
         });
@@ -49,6 +51,7 @@ public class ActivityOperaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent FavoritosToInfoActivity = new Intent(ActivityOperaciones.this, InfoActivity.class);
+                FavoritosToInfoActivity.putExtra("origen","fav");
                 startActivity(FavoritosToInfoActivity);
             }
         });

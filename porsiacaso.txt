@@ -1,0 +1,40 @@
+private final ArrayList<String> placeList;
+    private final Context context;
+
+
+    public AdapterTownList(InfoActivity context, int activity_adapter_list, ArrayList<String> places) {
+        super(context,activity_adapter_list, places);
+        placeList = places;
+        this.context = context;
+    }
+
+    @Override
+    public int getCount() {
+        return super.getCount();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.activity_adapter_list, null);
+
+        LinearLayout linearLayout = view.findViewById(R.id.ListLinearLayout);
+        linearLayout.setOnClickListener( view1 -> {
+            Intent intent = new Intent(context, InfoActivity.class);
+            intent.putExtra( "id", placeList.get(position));
+            context.startActivity(intent);
+        } );
+
+
+
+        TextView taskItemOne = view.findViewById(R.id.taskListItemOne);
+        TextView taskItemTwo = view.findViewById(R.id.taskListItemTwo);
+        TextView taskItemThree = view.findViewById(R.id.taskListItemThree);
+        TextView taskItemFour = view.findViewById(R.id.taskListItemFour);
+
+
+        taskItemOne.setText(placeList.get(position).toString());
+
+
+        return view;
+    }

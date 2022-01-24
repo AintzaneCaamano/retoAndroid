@@ -28,6 +28,8 @@ public class InfoActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private ArrayList<String> places;
     private AdapterTownList adapterTownList;
+    private static final String SEPARADOR = "/////";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,7 @@ public class InfoActivity extends AppCompatActivity {
     }
     private void loadListFromServer(String territory){
         // get the text message on the user and password
-        String messageSent = "4-" + territory ;
+        String messageSent = "4"+SEPARADOR + territory ;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);

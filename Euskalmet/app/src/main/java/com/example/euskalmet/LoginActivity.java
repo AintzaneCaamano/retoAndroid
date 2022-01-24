@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtxtUser;
     private EditText edTxtPass;
     private Button button;
-
+    private static final String SEPARADOR = "/////";
 
 
     @Override
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
 
                     // get the text message on the user and password
-                    String messageSent = "1-" + edtxtUser.getText().toString() + "-" + edTxtPass.getText().toString();
+                    String messageSent = "1"+SEPARADOR + edtxtUser.getText().toString() + SEPARADOR + edTxtPass.getText().toString();
                     Envio messageResponse;
                     ClientThread clientThread = new ClientThread();
                     clientThread.setOption(1);

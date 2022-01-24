@@ -17,6 +17,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double longitud = -2.960475856567045;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    private static final String SEPARADOR = "/////";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

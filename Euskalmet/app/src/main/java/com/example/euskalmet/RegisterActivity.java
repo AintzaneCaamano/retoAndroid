@@ -19,6 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText confirmarContraseñaRegister;
     private String patron;
     private String texto;
+    private static final String SEPARADOR = "/////";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (contraseñaRegister.getText().toString().equals(confirmarContraseñaRegister.getText().toString()) && isNumeric(contraseñaRegister.getText().toString())) {
 
 
-                        String messageSent = "2-" + usuarioRegister.getText().toString() + "-" + contraseñaRegister.getText().toString();
+                        String messageSent = "2"+ SEPARADOR + usuarioRegister.getText().toString() + SEPARADOR + contraseñaRegister.getText().toString();
                         Envio messageResponse;
                         ClientThread clientThread = new ClientThread();
                         clientThread.setMessageSent(messageSent);

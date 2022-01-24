@@ -15,11 +15,14 @@ import java.util.ArrayList;
 
 public class DetailMunicipioActivity extends AppCompatActivity {
     private ArrayList<Double>  choords;
-   private  TextView textViewNombreMunicipio;
+    private  TextView textViewNombreMunicipio;
     private  TextView textViewDesc;
     private Button btnVolverDetailMunicipio;
     private Button btnMapa;
+    private Button btnEspacio;
     private String info;
+    private static final String SEPARADOR = "/////";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +31,10 @@ public class DetailMunicipioActivity extends AppCompatActivity {
         textViewNombreMunicipio = findViewById(R.id.textView_NombreMunicipio);
         btnVolverDetailMunicipio = findViewById(R.id.btn_volverDetailMunicipio);
         btnMapa = findViewById(R.id.btn_mapaDetailMunicipio2);
+        btnEspacio = findViewById(R.id.btn_espaciosDetailMunicipio);
         textViewDesc= findViewById(R.id.txtVw_DetailMunicipio);
         Bundle extras = getIntent().getExtras();
         textViewNombreMunicipio.setText(extras.getString("place"));
-
         loadChoordInfoFromServer(extras.getString("place"));
         loadInfoFromServer(extras.getString("place"));
 
@@ -41,6 +44,15 @@ public class DetailMunicipioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(DetailMunicipioActivity.this, InfoActivity.class);
+                startActivity(intento);
+            }
+        });
+
+        btnEspacio .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intento = new Intent(DetailMunicipioActivity.this, DetailEspacioNaturalActivity.class);
+                intento.putExtra("place", extras.getString("place") );
                 startActivity(intento);
             }
         });
@@ -58,7 +70,7 @@ public class DetailMunicipioActivity extends AppCompatActivity {
     }
     private void loadChoordInfoFromServer(String territory){
         // get the text message on the user and password
-        String messageSent = "20-" + territory ;
+        String messageSent = "20"+SEPARADOR + territory ;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);
@@ -77,7 +89,7 @@ public class DetailMunicipioActivity extends AppCompatActivity {
     }
     private void loadInfoFromServer(String territory){
         // get the text message on the user and password
-        String messageSent = "21-" + territory ;
+        String messageSent = "21"+ SEPARADOR + territory ;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);

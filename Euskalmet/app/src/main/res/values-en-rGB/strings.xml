@@ -35,4 +35,5 @@
     <string name="txt_Guipuzcoa">Gipuzkoa</string>
     <string name="txt_Alaba">Alaba</string>
     <string name="txt_VerMapa">Show map</string>
+    <string name="txt_VerEspacios">Show natural areas</string>
 </resources>

@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar progressBar = null;
-   ImageView logo;
+   private ImageView logo;
 
     class MainActivityAsyncTask extends AsyncTask<Integer, Integer, String> {
 
