@@ -36,7 +36,8 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     private Button btnHacerFoto;
     private String messageResponse;
     private ImageView imageViewFoto;
-    private Uri uri;
+    private Bitmap photo;
+    // private Uri uri;
     private static final int CAMERA_REQUEST = 1;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final String SEPARADOR = "/////";
@@ -87,6 +88,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
+
         });
 
         btnVolverDetailEspacioNatural.setOnClickListener(new View.OnClickListener() {
@@ -118,10 +120,11 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            photo = (Bitmap) data.getExtras().get("data");
             imageViewFoto.setImageBitmap(photo);
             //para extraer la URI(ruta) de la foto
-             uri = (Uri) data.getData();
+            // uri = (Uri) data.getData();
+            SubirFotoAlServer();
         }
     }
 
@@ -151,9 +154,10 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     }
 
     private void SubirFotoAlServer(){
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.raw.playas);
+        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.raw.playas);
+        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), photo);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); // bm is the bitmap object
+        photo.compress(Bitmap.CompressFormat.JPEG, 50, baos); // bm is the bitmap object
         byte[] b = baos.toByteArray();
         String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
 

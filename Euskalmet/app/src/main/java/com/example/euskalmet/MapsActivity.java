@@ -13,16 +13,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.euskalmet.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    private double latitud = 43.245553729819484;
-    private double longitud = -2.960475856567045;
+    private double latitud ;
+    private double longitud ;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-    private static final String SEPARADOR = "/////";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         loadChords();
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
@@ -45,19 +44,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        loadChords();
         mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
         LatLng position = new LatLng(latitud, longitud);
         mMap.addMarker(new MarkerOptions().position(position).title("Estacion metereologica"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(9));
     }
 
     public void loadChords(){
         Bundle extras = getIntent().getExtras();
-        if (extras.getDouble("lat")>0){
-            latitud = (extras.getDouble("lat"));}
-        if (extras.getDouble("long")>0){
-            longitud =(extras.getDouble("long"));}
+        if (extras.getDouble("lat")!=0.0000){
+            latitud = (extras.getDouble("lat"));
+        }else {
+             latitud = 43.245553729819484;
+        }
+
+        if (extras.getDouble("long")!=0.0000){
+            longitud =(extras.getDouble("long"));
+        }else {
+            longitud = -2.960475856567045;
+        }
     }
 }

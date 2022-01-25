@@ -60,8 +60,8 @@ public class DetailMunicipioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(DetailMunicipioActivity.this, MapsActivity.class);
-                intento.putExtra("lat", 0 );
-                intento.putExtra("long", 0 );
+                intento.putExtra("lat", choords.get(0) );
+                intento.putExtra("long", choords.get(1) );
                 startActivity(intento);
             }
         });
