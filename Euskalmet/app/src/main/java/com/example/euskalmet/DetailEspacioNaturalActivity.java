@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +36,8 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     private TextView textVDescription;
     private Button btnVolverDetailEspacioNatural;
     private Button btnHacerFoto;
-    private String messageResponse;
+    private CheckBox fav;
+    private Envio messageResponse;
     private ImageView imageViewFoto;
     private Bitmap photo;
     // private Uri uri;
@@ -43,27 +46,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     private static final String SEPARADOR = "/////";
     private String areaName;
     private String areaDesc;
-    /*
-      @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_detail_espacio_natural);
 
-            textViewNombreEspacioNatural = findViewById(R.id.textView_NombreEspacioNatural);
-            btnVolverDetailEspacioNatural = findViewById(R.id.btn_volverDetailEspacioNatural);
-            btnHacerFoto = findViewById(R.id.btn_hacerFoto);
-            imageViewFoto = findViewById(R.id.imageViewFoto);
-
-            btnVolverDetailEspacioNatural.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
-                    startActivity(goToInfo);
-                }
-            });
-
-
-            */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +55,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         textViewNombreEspacioNatural = findViewById(R.id.textView_NombreEspacioNatural);
         textVDescription = findViewById(R.id.txtV_EspacioDetail_Desc);
         btnVolverDetailEspacioNatural = findViewById(R.id.btn_volverDetailEspacioNatural);
-        Button btnSacar = findViewById(R.id.btn_hacerFoto);
+        fav = findViewById(R.id.check_Detail_SaveFav);
         btnHacerFoto = findViewById(R.id.btn_hacerFoto);
         imageViewFoto = findViewById(R.id.imageViewFoto);
         Bundle extras = getIntent().getExtras();
@@ -80,7 +63,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         textViewNombreEspacioNatural.setText(areaName);
         textVDescription.setText(areaDesc);
 
-
+        comprobarFavs();
         btnHacerFoto.setOnClickListener(v -> {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
@@ -98,8 +81,18 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
                 startActivity(goToInfo);
             }
         });
-    }
 
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fav.isChecked()){
+                    guardarEnFavs();
+                }else{
+                    borrarDeFavs();
+                }
+            }
+        });
+    }
 
 
     @Override
@@ -178,7 +171,14 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         }
 
         // The Answer
-        messageResponse = clientThread.getStringResponse();
+        messageResponse = clientThread.getMessageResponse();
+        if(messageResponse.getLogin()){
+            Toast toastOk = Toast.makeText(getApplicationContext(), "Fotografía subida correctamente", Toast.LENGTH_LONG);
+            toastOk.show();
+        }else{
+            Toast toastOk = Toast.makeText(getApplicationContext(), "La fotografía no se ha subido", Toast.LENGTH_LONG);
+            toastOk.show();
+        }
     }
     private void loadInfoFromServer(String territory){
         // get the text message on the user and password
@@ -197,7 +197,85 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
         // The Answer
         ArrayList<String> arr = clientThread.getArrayStringResponse();
-        areaDesc = arr.get(1).toString();
-        areaName = arr.get(0).toString();
+        areaDesc = arr.get(0).toString();
+        areaName = arr.get(1).toString();
     }
+    private void comprobarFavs(){
+        // get the text message on the user and password
+        String messageSent = "25"+ SEPARADOR + LoginActivity.nombre+ SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
+
+        ClientThread clientThread = new ClientThread();
+        clientThread.setMessageSent(messageSent);
+        clientThread.setOption(1);
+        Thread thread = new Thread(clientThread);
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+
+        }
+
+        // The Answer
+        messageResponse = clientThread.getMessageResponse();
+        if(messageResponse.getLogin()){
+            fav.setChecked(true);
+        }else {
+            fav.setChecked(false);
+        }
+
+    }
+    private void guardarEnFavs(){
+        // get the text message on the user and password
+        String messageSent = "23"+ SEPARADOR + LoginActivity.nombre+ SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
+
+        ClientThread clientThread = new ClientThread();
+        clientThread.setMessageSent(messageSent);
+        clientThread.setOption(1);
+        Thread thread = new Thread(clientThread);
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+
+        }
+
+        // The Answer
+        messageResponse = clientThread.getMessageResponse();
+        if(messageResponse.getLogin()){
+            Toast toastOk = Toast.makeText(getApplicationContext(), "Favorito guardado correctamente", Toast.LENGTH_LONG);
+            toastOk.show();
+        }else{
+            Toast toastOk = Toast.makeText(getApplicationContext(), "Favorito no se ha podido guardar", Toast.LENGTH_LONG);
+            toastOk.show();
+        }
+
+    }
+    private void borrarDeFavs(){
+        // get the text message on the user and password
+        String messageSent = "24"+ SEPARADOR + LoginActivity.nombre + SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
+
+        ClientThread clientThread = new ClientThread();
+        clientThread.setMessageSent(messageSent);
+        clientThread.setOption(1);
+        Thread thread = new Thread(clientThread);
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+
+        }
+
+        // The Answer
+        messageResponse = clientThread.getMessageResponse();
+        if(messageResponse.getLogin()){
+            Toast toastOk = Toast.makeText(getApplicationContext(), "Favorito borrado correctamente", Toast.LENGTH_LONG);
+            toastOk.show();
+        }else{
+            Toast toastOk = Toast.makeText(getApplicationContext(), "Favorito no se ha podido borrar", Toast.LENGTH_LONG);
+            toastOk.show();
+    }
+}
 }

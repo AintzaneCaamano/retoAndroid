@@ -36,4 +36,5 @@
     <string name="txt_Alaba">Alaba</string>
     <string name="txt_VerMapa">Show map</string>
     <string name="txt_VerEspacios">Show natural areas</string>
+    <string name="txt_addFav">Add to favourites</string>
 </resources>
