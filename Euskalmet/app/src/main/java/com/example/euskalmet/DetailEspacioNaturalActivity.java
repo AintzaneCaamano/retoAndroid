@@ -58,12 +58,19 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         fav = findViewById(R.id.check_Detail_SaveFav);
         btnHacerFoto = findViewById(R.id.btn_hacerFoto);
         imageViewFoto = findViewById(R.id.imageViewFoto);
+
+
         Bundle extras = getIntent().getExtras();
-        loadInfoFromServer(extras.getString("place"));
+        if(extras.getString("origen").equals("Espacio")){
+            loadInfoFromServer2(extras.getString("place"));
+        }else{
+            loadInfoFromServer(extras.getString("place"));}
+
+
         textViewNombreEspacioNatural.setText(areaName);
         textVDescription.setText(areaDesc);
-
         comprobarFavs();
+
         btnHacerFoto.setOnClickListener(v -> {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
@@ -77,8 +84,13 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         btnVolverDetailEspacioNatural.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
-                startActivity(goToInfo);
+                if (extras.getString("origen").equals("Espacio")){
+                    Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, EspaciosNaturalesActivity.class);
+                    startActivity(goToInfo);
+                }else{
+                    Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
+                    startActivity(goToInfo);
+                }
             }
         });
 
@@ -156,6 +168,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
 
         // get the text message on the user and password
+        //TODO
         String messageSent = "9"+SEPARADOR + encodedImage;
 
         ClientThread clientThread = new ClientThread();
@@ -200,6 +213,27 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         areaDesc = arr.get(0).toString();
         areaName = arr.get(1).toString();
     }
+    private void loadInfoFromServer2(String territory){
+        // get the text message on the user and password
+        String messageSent = "26"+ SEPARADOR + territory ;
+
+        ClientThread clientThread = new ClientThread();
+        clientThread.setMessageSent(messageSent);
+        clientThread.setOption(2);
+        Thread thread = new Thread(clientThread);
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+
+        }
+
+        // The Answer
+        ArrayList<String> arr = clientThread.getArrayStringResponse();
+        areaDesc = arr.get(0).toString();
+        areaName = territory;
+    }
+
     private void comprobarFavs(){
         // get the text message on the user and password
         String messageSent = "25"+ SEPARADOR + LoginActivity.nombre+ SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
@@ -225,6 +259,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         }
 
     }
+
     private void guardarEnFavs(){
         // get the text message on the user and password
         String messageSent = "23"+ SEPARADOR + LoginActivity.nombre+ SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
@@ -252,6 +287,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         }
 
     }
+
     private void borrarDeFavs(){
         // get the text message on the user and password
         String messageSent = "24"+ SEPARADOR + LoginActivity.nombre + SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
@@ -278,4 +314,6 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
             toastOk.show();
     }
 }
+
+
 }

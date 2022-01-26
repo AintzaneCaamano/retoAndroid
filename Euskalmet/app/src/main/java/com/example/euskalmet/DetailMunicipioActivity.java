@@ -53,6 +53,9 @@ public class DetailMunicipioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intento = new Intent(DetailMunicipioActivity.this, DetailEspacioNaturalActivity.class);
                 intento.putExtra("place", extras.getString("place") );
+                intento.putExtra("origen", "municipio");
+                intento.putExtra("nombre", extras.getString("nombre"));
+                intento.putExtra("pass",  extras.getString("pass"));
                 startActivity(intento);
             }
         });

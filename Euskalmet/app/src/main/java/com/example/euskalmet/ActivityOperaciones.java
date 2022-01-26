@@ -41,7 +41,7 @@ public class ActivityOperaciones extends AppCompatActivity {
         btnEspaciosNaturales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent EspaciosNatToInfoActivity = new Intent(ActivityOperaciones.this, InfoActivity.class);
+                Intent EspaciosNatToInfoActivity = new Intent(ActivityOperaciones.this, EspaciosNaturalesActivity.class);
                 EspaciosNatToInfoActivity.putExtra("origen","natural");
                 startActivity(EspaciosNatToInfoActivity);
             }
@@ -50,7 +50,7 @@ public class ActivityOperaciones extends AppCompatActivity {
         btnFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent FavoritosToInfoActivity = new Intent(ActivityOperaciones.this, InfoActivity.class);
+                Intent FavoritosToInfoActivity = new Intent(ActivityOperaciones.this, FavoritosActivity.class);
                 FavoritosToInfoActivity.putExtra("origen","fav");
                 startActivity(FavoritosToInfoActivity);
             }
@@ -63,6 +63,7 @@ public class ActivityOperaciones extends AppCompatActivity {
                 startActivity(RankingToInfoActivity);
             }
         });
+
 
     }
 }

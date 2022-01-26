@@ -120,4 +120,5 @@ public class InfoActivity extends AppCompatActivity {
         places = clientThread.getArrayStringResponse();
 
     }
+
 }

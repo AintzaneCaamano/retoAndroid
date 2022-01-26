@@ -14,41 +14,41 @@ import com.example.euskalmet.cliente.ClientThread;
 
 import java.util.ArrayList;
 
-public class FavoritosActivity extends AppCompatActivity {
+public class EspaciosNaturalesActivity extends AppCompatActivity {
 
-    private ListView listViewFavoritos;
-    private Button btnVolverFavoritos;
+    private ListView listViewEspaciosNat;
+    private Button btnVolverInfoFromEspacios;
+    private static final String SEPARADOR = "/////";
     private AdapterTownList adapterTownList;
     private ArrayList<String> places;
-    private static final String SEPARADOR = "/////";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favoritos);
+        setContentView(R.layout.activity_espacios_naturales);
 
-        loadListFromServer(LoginActivity.nombre, LoginActivity.contrasenia);
-        btnVolverFavoritos = findViewById(R.id.btn_volverFavoritos);
-        listViewFavoritos = findViewById(R.id.listView_favoritos);
+        loadListFromServer();
+        listViewEspaciosNat = findViewById(R.id.listView_espaciosNat);
+        btnVolverInfoFromEspacios = findViewById(R.id.btn_volverOperacionesFromEspacios);
 
-        adapterTownList= new AdapterTownList(FavoritosActivity.this, R.layout.activity_adapter_list, places);
-        listViewFavoritos.setAdapter(adapterTownList);
-
+        adapterTownList= new AdapterTownList(EspaciosNaturalesActivity.this, R.layout.activity_adapter_list, places);
+        listViewEspaciosNat.setAdapter(adapterTownList);
+        Bundle extras = getIntent().getExtras();
         rearrageAdapter();
 
-        btnVolverFavoritos.setOnClickListener(new View.OnClickListener() {
+        btnVolverInfoFromEspacios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToOperaciones = new Intent(FavoritosActivity.this, ActivityOperaciones.class);
+                Intent goToOperaciones = new Intent(getApplicationContext(), ActivityOperaciones.class);
                 startActivity(goToOperaciones);
             }
         });
 
-        listViewFavoritos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewEspaciosNat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intento = new Intent(getApplicationContext(), DetailEspacioNaturalActivity.class);
-                String place =listViewFavoritos.getItemAtPosition(position).toString();
+                String place =listViewEspaciosNat.getItemAtPosition(position).toString();
                 intento.putExtra("place", place );
                 intento.putExtra("origen", "Espacio");
                 startActivity(intento);
@@ -57,14 +57,14 @@ public class FavoritosActivity extends AppCompatActivity {
     }
 
     private void rearrageAdapter(){
-        adapterTownList= new AdapterTownList(FavoritosActivity.this, R.layout.activity_adapter_list, places);
-        listViewFavoritos.setAdapter(adapterTownList);
+        adapterTownList= new AdapterTownList(EspaciosNaturalesActivity.this, R.layout.activity_adapter_list, places);
+        listViewEspaciosNat.setAdapter(adapterTownList);
         adapterTownList.notifyDataSetChanged();
     }
 
-    private void loadListFromServer(String user, int contrasenia){
+    private void loadListFromServer(){
         // get the text message on the user and password
-        String messageSent = "30"+SEPARADOR + user + SEPARADOR + contrasenia;
+        String messageSent = "31" + SEPARADOR + "";
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);
@@ -79,5 +79,6 @@ public class FavoritosActivity extends AppCompatActivity {
 
         // The Answer
         places = clientThread.getArrayStringResponse();
+
     }
 }
