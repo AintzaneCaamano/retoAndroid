@@ -36,6 +36,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     private TextView textVDescription;
     private Button btnVolverDetailEspacioNatural;
     private Button btnHacerFoto;
+    private Button btnDatosMetereologicos;
     private CheckBox fav;
     private Envio messageResponse;
     private ImageView imageViewFoto;
@@ -58,6 +59,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         fav = findViewById(R.id.check_Detail_SaveFav);
         btnHacerFoto = findViewById(R.id.btn_hacerFoto);
         imageViewFoto = findViewById(R.id.imageViewFoto);
+        btnDatosMetereologicos = findViewById(R.id.btn_DatosMetereologicos);
 
 
         Bundle extras = getIntent().getExtras();
@@ -91,6 +93,14 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
                     Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
                     startActivity(goToInfo);
                 }
+            }
+        });
+
+        btnDatosMetereologicos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToDatosMetereologicos = new Intent(DetailEspacioNaturalActivity.this, DatosMetereologicosActivity.class);
+                startActivity(goToDatosMetereologicos);
             }
         });
 
