@@ -59,11 +59,9 @@ public class ActivityOperaciones extends AppCompatActivity {
         btnRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RankingToInfoActivity = new Intent(ActivityOperaciones.this, InfoActivity.class);
+                Intent RankingToInfoActivity = new Intent(ActivityOperaciones.this, TopRankingActivity.class);
                 startActivity(RankingToInfoActivity);
             }
         });
-
-
     }
 }

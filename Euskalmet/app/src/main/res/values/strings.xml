@@ -127,4 +127,5 @@
     <string name="txt_VerEspacios">Ver espacios naturales</string>
     <string name="txt_addFav">Añadir a favoritos</string>
     <string name="txt_UbicacionEstacion">Mapa de estacion metereologica</string>
+    <string name="btn_DatosMetereologicos">Datos Metereológicos</string>
 </resources>
