@@ -1,5 +1,7 @@
 package com.example.euskalmet.cliente;
 
+import android.util.Log;
+
 import com.example.euskalmet.Envio;
 
 import java.io.ObjectInputStream;
@@ -49,11 +51,18 @@ public class ClientThread implements Runnable{
                case 3:
                    //Recibir String
                    receivedString = (String) objectInputStream.readObject();
+                   Log.i("***********RECIBIDO :",receivedString);
                    break;
                case 4:
                    //Recibir array de Double
                    receivedArrayDouble = (ArrayList<Double>) objectInputStream.readObject();
                    break;
+               case 5:
+                   receivedString = (String) objectInputStream.readObject();
+                   receivedString = receivedString.replaceAll("\n","");
+                   Log.i("***********RECIBIDO :",receivedString);
+                   break;
+
            }
 
         } catch (Exception e) {

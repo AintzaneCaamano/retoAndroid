@@ -114,6 +114,14 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
                 }
             }
         });
+
+        imageViewFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intento = new Intent(DetailEspacioNaturalActivity.this, GaleriaActivity.class);
+                startActivity(intento);
+            }
+        });
     }
 
 
@@ -143,30 +151,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         }
     }
 
-    private void getImagefromServer(){
 
-        String messageSent = "10"+ SEPARADOR + "1";
-        Envio messageResponse;
-        ClientThread clientThread = new ClientThread();
-        clientThread.setMessageSent(messageSent);
-        clientThread.setOption(3);
-        Thread thread = new Thread(clientThread);
-
-        try {
-            thread.start();
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // The Answer
-        String imgs  = clientThread.getStringResponse();
-
-        byte[] img = imgs.getBytes(StandardCharsets.UTF_8);
-        Bitmap bmp = BitmapFactory.decodeByteArray(img, 0, img.length);
-        //ImageView image = findViewById(R.id.imgview_fotoDetalle);
-        //image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(), image.getHeight(), false));
-    }
 
     private void SubirFotoAlServer(){
         //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.raw.playas);
