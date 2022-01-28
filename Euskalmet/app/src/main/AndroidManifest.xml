@@ -24,8 +24,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Euskalmet">
         <activity
-        android:name=".EspaciosNaturalesActivity"
-        android:exported="false" />
+            android:name=".GaleriaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EspaciosNaturalesActivity"
+            android:exported="false" />
         <activity
             android:name=".FavoritosActivity"
             android:exported="false" />
