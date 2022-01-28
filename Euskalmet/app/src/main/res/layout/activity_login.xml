@@ -8,18 +8,20 @@
 
     <EditText
         android:id="@+id/editText_contraseña"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="295dp"
+        android:layout_height="48dp"
+        android:drawableStart="@drawable/ic_lock"
         android:ems="10"
-        android:text="123"
-        android:inputType="textPersonName"
+        android:hint="@string/textView_contraseña"
+        android:inputType="textPassword"
         android:minHeight="48dp"
+        android:text="123"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"
+        app:layout_constraintVertical_bias="0.435"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <Button
@@ -52,18 +54,19 @@
 
     <EditText
         android:id="@+id/editText_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="299dp"
+        android:layout_height="48dp"
+        android:drawableStart="@drawable/ic_email"
         android:ems="10"
-        android:text="markel"
-        android:inputType="textPersonName"
+        android:hint="@string/textView_usuario"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
+        android:text="markel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368"
+        app:layout_constraintVertical_bias="0.357"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <Switch
@@ -92,31 +95,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.701"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textView_contraseña"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/textView_contraseña"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
-
-    <TextView
-        android:id="@+id/textView_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/textView_usuario"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
