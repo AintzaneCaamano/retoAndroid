@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -122,6 +125,27 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
                 startActivity(intento);
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.share_menu){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, areaName + areaDesc);
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
 
