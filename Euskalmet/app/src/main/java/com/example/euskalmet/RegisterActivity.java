@@ -58,14 +58,16 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                         if (null == messageResponse) {
-                            btnRegister2.setText("no ha llegado");
+                            Toast toast = Toast.makeText(getApplicationContext(), "no ha llegado", Toast.LENGTH_LONG);
+                            toast.show();
                         } else if (messageResponse.getLogin()) {
                             Toast register = Toast.makeText(getApplicationContext(), "Se ha registrado correctamente", Toast.LENGTH_LONG);
                             register.show();
                             Intent goToLogin = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(goToLogin);
                         } else if (!messageResponse.getLogin()) {
-                            btnRegister2.setText("No se ha podido registrar");
+                            Toast toast = Toast.makeText(getApplicationContext(), "No se ha podido registrar o el ususario ya existe", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     }
                     else {
