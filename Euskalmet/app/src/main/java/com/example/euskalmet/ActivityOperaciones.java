@@ -13,7 +13,7 @@ public class ActivityOperaciones extends AppCompatActivity {
     private Button btnEspaciosNaturales;
     private  Button btnFavoritos;
     private Button btnRanking;
-    private Button btnCambiarIdioma;
+
     private String user;
     private int pass;
 
@@ -26,7 +26,7 @@ public class ActivityOperaciones extends AppCompatActivity {
         btnEspaciosNaturales = findViewById(R.id.Operac_btnEspacios);
         btnFavoritos = findViewById(R.id.Operac_btnFavs);
         btnRanking = findViewById(R.id.Operac_btnTop);
-        btnCambiarIdioma = findViewById(R.id.Operac_changeLang);
+
 
 
         Bundle extras = getIntent().getExtras();

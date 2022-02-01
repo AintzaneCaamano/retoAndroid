@@ -15,8 +15,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     Button btnRegister2;
     private EditText usuarioRegister;
-    private EditText contraseñaRegister;
-    private EditText confirmarContraseñaRegister;
+    private EditText contraseniaRegister;
+    private EditText confirmarContraseniaRegister;
     private String patron;
     private String texto;
     private static final String SEPARADOR = "/////";
@@ -28,20 +28,22 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnRegister2 = findViewById(R.id.btn_register2);
         usuarioRegister = findViewById(R.id.editText_usuarioRegister);
-        contraseñaRegister = findViewById(R.id.editText_contraseñaRegister);
-        confirmarContraseñaRegister = findViewById(R.id.editText_ConfirmContraseña);
+        contraseniaRegister = findViewById(R.id.editText_contraseñaRegister);
+        confirmarContraseniaRegister = findViewById(R.id.editText_ConfirmContraseña);
 
         btnRegister2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (contraseñaRegister != null && confirmarContraseñaRegister != null ) {
-                    if (contraseñaRegister.getText().toString().equals(confirmarContraseñaRegister.getText().toString()) && isNumeric(contraseñaRegister.getText().toString())) {
+                if (contraseniaRegister != null && confirmarContraseniaRegister != null ) {
+                    if (contraseniaRegister.getText().toString().equals(confirmarContraseniaRegister.getText().toString()) && isNumeric(contraseniaRegister.getText().toString())) {
 
 
-                        String messageSent = "2"+ SEPARADOR + usuarioRegister.getText().toString() + SEPARADOR + contraseñaRegister.getText().toString();
-                        Envio messageResponse;
+                        String messageSent = "2"+ SEPARADOR + usuarioRegister.getText().toString() + SEPARADOR + contraseniaRegister.getText().toString();
+
                         ClientThread clientThread = new ClientThread();
+                        clientThread.setOption(1);
                         clientThread.setMessageSent(messageSent);
+
 
                         Thread thread = new Thread(clientThread);
                         try {
@@ -52,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         // The Answer
-                        messageResponse = clientThread.getMessageResponse();
+                        Envio messageResponse = clientThread.getMessageResponse();
 
 
                         if (null == messageResponse) {

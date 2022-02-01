@@ -43,5 +43,13 @@ public class DatosMeteorologicosActivity extends AppCompatActivity {
             }
         });
 
+        btnVolverDatosMeteorologicos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToDetailEspacioNatural = new Intent(DatosMeteorologicosActivity.this, DetailEspacioNaturalActivity.class);
+                startActivity(goToDetailEspacioNatural);
+            }
+        });
+
     }
 }

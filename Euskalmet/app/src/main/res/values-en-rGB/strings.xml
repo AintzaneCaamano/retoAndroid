@@ -39,4 +39,5 @@
     <string name="txt_addFav">Add to favourites</string>
     <string name="txt_UbicacionEstacion">Show weather station in a map</string>
     <string name="btn_DatosMetereologicos">Weather data</string>
+    <string name="textView_infoTitleMunicipio">Municipality</string>
 </resources>
