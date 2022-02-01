@@ -77,8 +77,10 @@ public class LoginActivity extends AppCompatActivity {
                         Toast login = Toast.makeText(getApplicationContext(), "Se ha logueado correctamente", Toast.LENGTH_LONG);
                         login.show();
 
-                        Intent goToOperaciones = new Intent(LoginActivity.this, ActivityOperaciones.class);
-                        startActivity(goToOperaciones);
+                        Intent intento = new Intent(LoginActivity.this, ActivityOperaciones.class);
+                        intento.putExtra("user", nombre);
+                        intento.putExtra("pass", String.valueOf(contrasenia));
+                        startActivity(intento);
                     } else if (!messageResponse.getLogin()) {
                         Toast credencialesIncorrectas = Toast.makeText(getApplicationContext(), "credenciales incorrectas", Toast.LENGTH_LONG);
                         credencialesIncorrectas.show();

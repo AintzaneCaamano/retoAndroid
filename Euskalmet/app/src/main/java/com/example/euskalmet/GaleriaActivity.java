@@ -22,6 +22,8 @@ public class GaleriaActivity extends AppCompatActivity {
     private ImageView foto1;
     private static final String SEPARADOR = "/////";
     private  ArrayList<String> imgs;
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class GaleriaActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String place = extras.getString("place");
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
 
         getImagefromServer(place);
 

@@ -10,22 +10,36 @@ import android.widget.ListView;
 
 public class DatosMeteorologicosActivity extends AppCompatActivity {
 
-    private Button btnVolverDatosMetereologicos;
+    private Button btnVolverDatosMeteorologicos;
     private ListView listViewDatosMetereologicos;
+    private String origen;
+    private String areaName;
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_meteorologicos);
 
-        btnVolverDatosMetereologicos = findViewById(R.id.btn_volverDatosMetereologicos);
+        Bundle extras = getIntent().getExtras();
+        origen = extras.getString("origen");
+        areaName = extras.getString("place");
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
+
+        btnVolverDatosMeteorologicos = findViewById(R.id.btn_volverDatosMetereologicos);
         listViewDatosMetereologicos = findViewById(R.id.listView_datosMetereologicos);
 
-        btnVolverDatosMetereologicos.setOnClickListener(new View.OnClickListener() {
+        btnVolverDatosMeteorologicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToDetailEspacios = new Intent(DatosMeteorologicosActivity.this, DetailEspacioNaturalActivity.class);
-                startActivity(goToDetailEspacios);
+                Intent intento = new Intent(DatosMeteorologicosActivity.this, DetailEspacioNaturalActivity.class);
+                intento.putExtra("place", areaName );
+                intento.putExtra("origen", origen);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
+                startActivity(intento);
             }
         });
 

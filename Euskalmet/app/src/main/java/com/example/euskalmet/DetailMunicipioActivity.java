@@ -22,6 +22,8 @@ public class DetailMunicipioActivity extends AppCompatActivity {
     private Button btnEspacio;
     private String info;
     private static final String SEPARADOR = "/////";
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,10 @@ public class DetailMunicipioActivity extends AppCompatActivity {
         btnMapa = findViewById(R.id.btn_mapaDetailMunicipio2);
         btnEspacio = findViewById(R.id.btn_espaciosDetailMunicipio);
         textViewDesc= findViewById(R.id.txtVw_DetailMunicipio);
+
         Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
         textViewNombreMunicipio.setText(extras.getString("place"));
         loadChoordInfoFromServer(extras.getString("place"));
         loadInfoFromServer(extras.getString("place"));
@@ -44,6 +49,8 @@ public class DetailMunicipioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(DetailMunicipioActivity.this, InfoActivity.class);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });
@@ -54,8 +61,8 @@ public class DetailMunicipioActivity extends AppCompatActivity {
                 Intent intento = new Intent(DetailMunicipioActivity.this, DetailEspacioNaturalActivity.class);
                 intento.putExtra("place", extras.getString("place") );
                 intento.putExtra("origen", "municipio");
-                intento.putExtra("nombre", extras.getString("nombre"));
-                intento.putExtra("pass",  extras.getString("pass"));
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });
@@ -65,6 +72,8 @@ public class DetailMunicipioActivity extends AppCompatActivity {
                 Intent intento = new Intent(DetailMunicipioActivity.this, MapsActivity.class);
                 intento.putExtra("lat", choords.get(0) );
                 intento.putExtra("long", choords.get(1) );
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });

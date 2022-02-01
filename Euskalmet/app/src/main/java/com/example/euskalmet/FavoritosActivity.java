@@ -21,13 +21,20 @@ public class FavoritosActivity extends AppCompatActivity {
     private AdapterTownList adapterTownList;
     private ArrayList<String> places;
     private static final String SEPARADOR = "/////";
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos);
 
-        loadListFromServer(LoginActivity.nombre, LoginActivity.contrasenia);
+
+        Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
+
+        loadListFromServer(user, pass);
         btnVolverFavoritos = findViewById(R.id.btn_volverFavoritos);
         listViewFavoritos = findViewById(R.id.listView_favoritos);
 
@@ -39,8 +46,10 @@ public class FavoritosActivity extends AppCompatActivity {
         btnVolverFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToOperaciones = new Intent(FavoritosActivity.this, ActivityOperaciones.class);
-                startActivity(goToOperaciones);
+                Intent intento = new Intent(FavoritosActivity.this, ActivityOperaciones.class);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
+                startActivity(intento);
             }
         });
 
@@ -51,6 +60,8 @@ public class FavoritosActivity extends AppCompatActivity {
                 String place =listViewFavoritos.getItemAtPosition(position).toString();
                 intento.putExtra("place", place );
                 intento.putExtra("origen", "Espacio");
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });
