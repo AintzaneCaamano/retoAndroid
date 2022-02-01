@@ -27,7 +27,7 @@
             android:name=".GaleriaActivity"
             android:exported="true" />
         <activity
-            android:name=".DatosMetereologicosActivity"
+            android:name=".DatosMeteorologicosActivity"
             android:exported="false" />
         <activity
             android:name=".TopRankingActivity"

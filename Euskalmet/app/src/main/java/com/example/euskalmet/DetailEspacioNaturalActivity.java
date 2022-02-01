@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
@@ -14,23 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.euskalmet.cliente.ClientThread;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DetailEspacioNaturalActivity extends AppCompatActivity {
@@ -102,7 +96,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         btnDatosMetereologicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToDatosMetereologicos = new Intent(DetailEspacioNaturalActivity.this, DatosMetereologicosActivity.class);
+                Intent goToDatosMetereologicos = new Intent(DetailEspacioNaturalActivity.this, DatosMeteorologicosActivity.class);
                 startActivity(goToDatosMetereologicos);
             }
         });
@@ -122,6 +116,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(DetailEspacioNaturalActivity.this, GaleriaActivity.class);
+                intento.putExtra("place", areaName);
                 startActivity(intento);
             }
         });
@@ -188,7 +183,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
         // get the text message on the user and password
         //TODO
-        String messageSent = "9"+SEPARADOR + encodedImage;
+        String messageSent = "9" + SEPARADOR+ areaName +SEPARADOR + encodedImage;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setOption(1);

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class DatosMetereologicosActivity extends AppCompatActivity {
+public class DatosMeteorologicosActivity extends AppCompatActivity {
 
     private Button btnVolverDatosMetereologicos;
     private ListView listViewDatosMetereologicos;
@@ -16,7 +16,7 @@ public class DatosMetereologicosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos_metereologicos);
+        setContentView(R.layout.activity_datos_meteorologicos);
 
         btnVolverDatosMetereologicos = findViewById(R.id.btn_volverDatosMetereologicos);
         listViewDatosMetereologicos = findViewById(R.id.listView_datosMetereologicos);
@@ -24,7 +24,7 @@ public class DatosMetereologicosActivity extends AppCompatActivity {
         btnVolverDatosMetereologicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToDetailEspacios = new Intent(DatosMetereologicosActivity.this, DetailEspacioNaturalActivity.class);
+                Intent goToDetailEspacios = new Intent(DatosMeteorologicosActivity.this, DetailEspacioNaturalActivity.class);
                 startActivity(goToDetailEspacios);
             }
         });
