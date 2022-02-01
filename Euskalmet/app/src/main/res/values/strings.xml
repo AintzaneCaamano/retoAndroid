@@ -126,6 +126,6 @@
     <string name="txt_VerMapa">Ver mapa</string>
     <string name="txt_VerEspacios">Ver espacios naturales</string>
     <string name="txt_addFav">Añadir a favoritos</string>
-    <string name="txt_UbicacionEstacion">Mapa de estacion metereologica</string>
-    <string name="btn_DatosMetereologicos">Datos Metereológicos</string>
+    <string name="txt_UbicacionEstacion">Mapa de estacion meteorologica</string>
+    <string name="btn_DatosMetereologicos">Datos Meteorológicos</string>
 </resources>

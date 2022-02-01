@@ -21,6 +21,9 @@ public class EspaciosNaturalesActivity extends AppCompatActivity {
     private static final String SEPARADOR = "/////";
     private AdapterTownList adapterTownList;
     private ArrayList<String> places;
+    private String user;
+    private int pass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +36,20 @@ public class EspaciosNaturalesActivity extends AppCompatActivity {
 
         adapterTownList= new AdapterTownList(EspaciosNaturalesActivity.this, R.layout.activity_adapter_list, places);
         listViewEspaciosNat.setAdapter(adapterTownList);
+
         Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
+
         rearrageAdapter();
 
         btnVolverInfoFromEspacios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToOperaciones = new Intent(getApplicationContext(), ActivityOperaciones.class);
-                startActivity(goToOperaciones);
+                Intent intento = new Intent(getApplicationContext(), ActivityOperaciones.class);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
+                startActivity(intento);
             }
         });
 
@@ -51,6 +60,8 @@ public class EspaciosNaturalesActivity extends AppCompatActivity {
                 String place =listViewEspaciosNat.getItemAtPosition(position).toString();
                 intento.putExtra("place", place );
                 intento.putExtra("origen", "Espacio");
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });

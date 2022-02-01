@@ -29,6 +29,8 @@ public class InfoActivity extends AppCompatActivity {
     private ArrayList<String> places;
     private AdapterTownList adapterTownList;
     private static final String SEPARADOR = "/////";
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,10 @@ public class InfoActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.rGroupInfo);
 
 
+        Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
+
         loadListFromServer("1");
         adapterTownList= new AdapterTownList(InfoActivity.this, R.layout.activity_adapter_list, places);
         listViewInfo.setAdapter(adapterTownList);
@@ -52,9 +58,10 @@ public class InfoActivity extends AppCompatActivity {
         btnVolverInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToOperaciones = new Intent(InfoActivity.this, ActivityOperaciones.class);
-
-                startActivity(goToOperaciones);
+                Intent intento = new Intent(InfoActivity.this, ActivityOperaciones.class);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
+                startActivity(intento);
             }
         });
 
@@ -64,6 +71,8 @@ public class InfoActivity extends AppCompatActivity {
                     Intent intento = new Intent(getApplicationContext(), DetailMunicipioActivity.class);
                     String place =listViewInfo.getItemAtPosition(position).toString();
                     intento.putExtra("place", place );
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
 
             }

@@ -21,6 +21,8 @@ public class TopRankingActivity extends AppCompatActivity {
     private AdapterTownList adapterTownList;
     private ArrayList<String> places;
     private static final String SEPARADOR = "/////";
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,11 @@ public class TopRankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_top_ranking);
 
         loadListFromServer();
+
+        Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
+
         listViewTopRanking = findViewById(R.id.listView_topRanking);
         btnVolverFromRanking = findViewById(R.id.btn_volverOperacionesFromRanking);
 
@@ -39,8 +46,10 @@ public class TopRankingActivity extends AppCompatActivity {
         btnVolverFromRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToOperacionesFromRanking = new Intent(TopRankingActivity.this, ActivityOperaciones.class);
-                startActivity(goToOperacionesFromRanking);
+                Intent intento = new Intent(TopRankingActivity.this, ActivityOperaciones.class);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
+                startActivity(intento);
             }
         });
 
@@ -51,6 +60,8 @@ public class TopRankingActivity extends AppCompatActivity {
                 String place =listViewTopRanking.getItemAtPosition(position).toString();
                 intento.putExtra("place", place );
                 intento.putExtra("origen", "Espacio");
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });

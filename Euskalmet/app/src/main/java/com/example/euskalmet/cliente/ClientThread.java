@@ -39,31 +39,32 @@ public class ClientThread implements Runnable{
 
 
             // object = objectInputStream.readObject();
-           switch (option) {
-               case 1:
-                   //recibir un envio
-                   receivedEnvio = (Envio) objectInputStream.readObject();
-                   break;
-               case 2 :
-                   //Recibir array de Strings
-                   receivedArray = (ArrayList<String>) objectInputStream.readObject();
-                   break;
-               case 3:
-                   //Recibir String
-                   receivedString = (String) objectInputStream.readObject();
-                   Log.i("***********RECIBIDO :",receivedString);
-                   break;
-               case 4:
-                   //Recibir array de Double
-                   receivedArrayDouble = (ArrayList<Double>) objectInputStream.readObject();
-                   break;
-               case 5:
-                   receivedString = (String) objectInputStream.readObject();
-                   receivedString = receivedString.replaceAll("\n","");
-                   Log.i("***********RECIBIDO :",receivedString);
-                   break;
+            switch (option) {
+                case 1:
+                    //recibir un envio
+                    receivedEnvio = (Envio) objectInputStream.readObject();
+                    break;
+                case 2 :
+                    //Recibir array de Strings
+                    receivedArray = (ArrayList<String>) objectInputStream.readObject();
+                    break;
+                case 3:
+                    //Recibir String
+                    receivedString = (String) objectInputStream.readObject();
+                    Log.i("***********RECIBIDO :",receivedString);
+                    break;
+                case 4:
+                    //Recibir array de Double
+                    receivedArrayDouble = (ArrayList<Double>) objectInputStream.readObject();
+                    break;
+                case 5:
+                    receivedArray = (ArrayList<String>) objectInputStream.readObject();
+                    // receivedString = (String) objectInputStream.readObject();
+                    // receivedString = receivedString.replaceAll("\n","");
+                    // Log.i("***********RECIBIDO :",receivedString);
+                    break;
 
-           }
+            }
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -104,7 +105,7 @@ public class ClientThread implements Runnable{
         return receivedArrayDouble;
     }
     public void setOption(int op){
-      option =op;
+        option =op;
     }
 }
 

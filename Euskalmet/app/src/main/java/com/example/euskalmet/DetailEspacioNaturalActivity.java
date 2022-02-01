@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
@@ -14,23 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.euskalmet.cliente.ClientThread;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DetailEspacioNaturalActivity extends AppCompatActivity {
@@ -39,7 +33,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     private TextView textVDescription;
     private Button btnVolverDetailEspacioNatural;
     private Button btnHacerFoto;
-    private Button btnDatosMetereologicos;
+    private Button btnDatosMeteorologicos;
     private CheckBox fav;
     private Envio messageResponse;
     private ImageView imageViewFoto;
@@ -50,6 +44,9 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
     private static final String SEPARADOR = "/////";
     private String areaName;
     private String areaDesc;
+    private String origen;
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +59,15 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         fav = findViewById(R.id.check_Detail_SaveFav);
         btnHacerFoto = findViewById(R.id.btn_hacerFoto);
         imageViewFoto = findViewById(R.id.imageViewFoto);
-        btnDatosMetereologicos = findViewById(R.id.btn_DatosMetereologicos);
+        btnDatosMeteorologicos = findViewById(R.id.btn_DatosMetereologicos);
 
 
         Bundle extras = getIntent().getExtras();
+        origen = extras.getString("origen");
+        areaName = extras.getString("place");
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
+
         if(extras.getString("origen").equals("Espacio")){
             loadInfoFromServer2(extras.getString("place"));
         }else{
@@ -90,20 +92,28 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (extras.getString("origen").equals("Espacio")){
-                    Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, EspaciosNaturalesActivity.class);
-                    startActivity(goToInfo);
+                    Intent intento = new Intent(DetailEspacioNaturalActivity.this, EspaciosNaturalesActivity.class);
+                    intento.putExtra("user", user);
+                    intento.putExtra("pass", String.valueOf(pass));
+                    startActivity(intento);
                 }else{
-                    Intent goToInfo = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
-                    startActivity(goToInfo);
+                    Intent intento = new Intent(DetailEspacioNaturalActivity.this, InfoActivity.class);
+                    intento.putExtra("user", user);
+                    intento.putExtra("pass", String.valueOf(pass));
+                    startActivity(intento);
                 }
             }
         });
 
-        btnDatosMetereologicos.setOnClickListener(new View.OnClickListener() {
+        btnDatosMeteorologicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToDatosMetereologicos = new Intent(DetailEspacioNaturalActivity.this, DatosMetereologicosActivity.class);
-                startActivity(goToDatosMetereologicos);
+                Intent intento = new Intent(DetailEspacioNaturalActivity.this, DatosMeteorologicosActivity.class);
+                intento.putExtra("place", areaName );
+                intento.putExtra("origen", origen);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
+                startActivity(intento);
             }
         });
 
@@ -122,6 +132,9 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(DetailEspacioNaturalActivity.this, GaleriaActivity.class);
+                intento.putExtra("place", areaName);
+                intento.putExtra("user", user);
+                intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
             }
         });
@@ -188,7 +201,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
         // get the text message on the user and password
         //TODO
-        String messageSent = "9"+SEPARADOR + encodedImage;
+        String messageSent = "9" + SEPARADOR+ areaName +SEPARADOR + encodedImage;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setOption(1);
@@ -255,7 +268,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
     private void comprobarFavs(){
         // get the text message on the user and password
-        String messageSent = "25"+ SEPARADOR + LoginActivity.nombre+ SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
+        String messageSent = "25"+ SEPARADOR + user+ SEPARADOR + pass + SEPARADOR + areaName;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);
@@ -281,7 +294,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
     private void guardarEnFavs(){
         // get the text message on the user and password
-        String messageSent = "23"+ SEPARADOR + LoginActivity.nombre+ SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
+        String messageSent = "23"+ SEPARADOR + user+ SEPARADOR + pass + SEPARADOR + areaName;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);
@@ -309,7 +322,7 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
 
     private void borrarDeFavs(){
         // get the text message on the user and password
-        String messageSent = "24"+ SEPARADOR + LoginActivity.nombre + SEPARADOR + LoginActivity.contrasenia + SEPARADOR + areaName;
+        String messageSent = "24"+ SEPARADOR + user + SEPARADOR + pass + SEPARADOR + areaName;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);

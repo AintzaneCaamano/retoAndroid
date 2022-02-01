@@ -17,7 +17,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double longitud ;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-
+    private String user;
+    private int pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -55,6 +57,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void loadChords(){
         Bundle extras = getIntent().getExtras();
+        user = extras.getString("user");
+        pass = Integer.parseInt(extras.getString("pass"));
         if (extras.getDouble("lat")!=0.0000){
             latitud = (extras.getDouble("lat"));
         }else {
