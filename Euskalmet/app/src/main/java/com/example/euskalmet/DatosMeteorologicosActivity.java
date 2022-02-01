@@ -5,13 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.euskalmet.adapters.AdapterTownList;
+import com.example.euskalmet.cliente.ClientThread;
+
+import java.util.ArrayList;
 
 public class DatosMeteorologicosActivity extends AppCompatActivity {
 
     private Button btnVolverDatosMeteorologicos;
     private ListView listViewDatosMetereologicos;
+    private AdapterTownList adapterTownList;
+    private ArrayList<String> places;
+    private static final String SEPARADOR = "/////";
     private String origen;
     private String areaName;
     private String user;
@@ -31,6 +40,11 @@ public class DatosMeteorologicosActivity extends AppCompatActivity {
         btnVolverDatosMeteorologicos = findViewById(R.id.btn_volverDatosMetereologicos);
         listViewDatosMetereologicos = findViewById(R.id.listView_datosMetereologicos);
 
+        adapterTownList= new AdapterTownList(DatosMeteorologicosActivity.this, R.layout.activity_adapter_list, places);
+        listViewDatosMetereologicos.setAdapter(adapterTownList);
+
+        rearrageAdapter();
+
         btnVolverDatosMeteorologicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,13 +57,41 @@ public class DatosMeteorologicosActivity extends AppCompatActivity {
             }
         });
 
-        btnVolverDatosMeteorologicos.setOnClickListener(new View.OnClickListener() {
+        listViewDatosMetereologicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent goToDetailEspacioNatural = new Intent(DatosMeteorologicosActivity.this, DetailEspacioNaturalActivity.class);
-                startActivity(goToDetailEspacioNatural);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intento = new Intent(getApplicationContext(), DetailEspacioNaturalActivity.class);
+                String place =listViewDatosMetereologicos.getItemAtPosition(position).toString();
+                intento.putExtra("place", place );
+                intento.putExtra("origen", "Espacio");
+                startActivity(intento);
             }
         });
-
     }
+
+    private void rearrageAdapter(){
+        adapterTownList= new AdapterTownList(DatosMeteorologicosActivity.this, R.layout.activity_adapter_list, places);
+        listViewDatosMetereologicos.setAdapter(adapterTownList);
+        adapterTownList.notifyDataSetChanged();
+    }
+
+    private void loadListFromServer(){
+        // get the text message on the user and password
+        String messageSent = "36" + SEPARADOR;
+
+        ClientThread clientThread = new ClientThread();
+        clientThread.setMessageSent(messageSent);
+        clientThread.setOption(2);
+        Thread thread = new Thread(clientThread);
+        try {
+            thread.start();
+            thread.join();
+        } catch (InterruptedException e) {
+
+        }
+
+        // The Answer
+        places = clientThread.getArrayStringResponse();
+    }
+
 }
