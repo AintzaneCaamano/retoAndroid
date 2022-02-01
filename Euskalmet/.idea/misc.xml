@@ -33,13 +33,17 @@
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/drawable/ic_lock.xml" value="0.19444444444444445" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/drawable/ic_lock_focused.xml" value="0.19444444444444445" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/drawable/ic_share.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_adapter_list.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_datos_metereologicos.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_detail_espacio_natural.xml" value="0.25" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_detail_municipio.xml" value="0.1490036231884058" />
+        <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_espacios_naturales.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_favoritos.xml" value="0.2" />
+        <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_galeria.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_info.xml" value="0.25" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_maps.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_operaciones.xml" value="0.25" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/in2dam-b/Desktop/RetoAndroidEuskalmet/retoAndroid/Euskalmet/app/src/main/res/layout/activity_top_ranking.xml" value="0.1641337386018237" />
