@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Euskalmet">
         <activity
+            android:name=".Galeria2Activity"
+            android:exported="true" />
+        <activity
             android:name=".GaleriaActivity"
             android:exported="true" />
         <activity

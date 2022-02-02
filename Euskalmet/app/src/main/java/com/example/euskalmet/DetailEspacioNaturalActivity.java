@@ -68,10 +68,10 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
         user = extras.getString("user");
         pass = Integer.parseInt(extras.getString("pass"));
 
-        if(extras.getString("origen").equals("Espacio")){
-            loadInfoFromServer2(extras.getString("place"));
+        if(extras.getString("origen").equals("municipio")){
+            loadInfoFromServer(extras.getString("place"));
         }else{
-            loadInfoFromServer(extras.getString("place"));}
+            loadInfoFromServer2(extras.getString("place"));}
 
 
         textViewNombreEspacioNatural.setText(areaName);
@@ -93,6 +93,17 @@ public class DetailEspacioNaturalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (extras.getString("origen").equals("Espacio")){
                     Intent intento = new Intent(DetailEspacioNaturalActivity.this, EspaciosNaturalesActivity.class);
+                    intento.putExtra("user", user);
+                    intento.putExtra("pass", String.valueOf(pass));
+                    startActivity(intento);
+                }
+                else if (extras.getString("origen").equals("fav")){
+                    Intent intento = new Intent(DetailEspacioNaturalActivity.this, FavoritosActivity.class);
+                    intento.putExtra("user", user);
+                    intento.putExtra("pass", String.valueOf(pass));
+                    startActivity(intento);
+                } else if (extras.getString("origen").equals("top")){
+                    Intent intento = new Intent(DetailEspacioNaturalActivity.this, TopRankingActivity.class);
                     intento.putExtra("user", user);
                     intento.putExtra("pass", String.valueOf(pass));
                     startActivity(intento);

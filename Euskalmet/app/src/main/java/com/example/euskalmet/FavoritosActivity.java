@@ -59,7 +59,7 @@ public class FavoritosActivity extends AppCompatActivity {
                 Intent intento = new Intent(getApplicationContext(), DetailEspacioNaturalActivity.class);
                 String place =listViewFavoritos.getItemAtPosition(position).toString();
                 intento.putExtra("place", place );
-                intento.putExtra("origen", "Espacio");
+                intento.putExtra("origen", "fav");
                 intento.putExtra("user", user);
                 intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);

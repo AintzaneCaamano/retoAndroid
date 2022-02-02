@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_500"
     tools:context=".InfoActivity">
 
     <ListView
         android:id="@+id/listView_favoritos"
         android:layout_width="365dp"
         android:layout_height="264dp"
+        android:background="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textView_infoTitleMunicipio"
+        android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,10 +34,10 @@
 
     <Button
         android:id="@+id/btn_volverInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_VolverInfo"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_custom_green"
+        android:text="@string/btn_VolverInfo"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,22 +61,25 @@
             android:id="@+id/rBtn_info_Viz"
             android:layout_width="299dp"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/txt_Vizcaya"
-            android:onClick="onRadioButtonClicked"/>
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/rBtn_Info_Gui"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/txt_Guipuzcoa"
-            android:onClick="onRadioButtonClicked"/>
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/rBtn_Info_Alaba"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
             android:text="@string/txt_Alaba"
-            android:onClick="onRadioButtonClicked"/>
+            android:textColor="@color/white" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

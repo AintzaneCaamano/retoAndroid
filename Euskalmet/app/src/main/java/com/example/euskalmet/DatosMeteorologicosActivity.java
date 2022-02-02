@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.euskalmet.adapters.AdapterTownList;
+import com.example.euskalmet.adapters.AdapterDataList;
 import com.example.euskalmet.cliente.ClientThread;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class DatosMeteorologicosActivity extends AppCompatActivity {
 
     private Button btnVolverDatosMeteorologicos;
     private ListView listViewDatosMetereologicos;
-    private AdapterTownList adapterTownList;
+    private AdapterDataList adapter;
     private ArrayList<String> places;
     private static final String SEPARADOR = "/////";
     private String origen;
@@ -40,8 +40,10 @@ public class DatosMeteorologicosActivity extends AppCompatActivity {
         btnVolverDatosMeteorologicos = findViewById(R.id.btn_volverDatosMetereologicos);
         listViewDatosMetereologicos = findViewById(R.id.listView_datosMetereologicos);
 
-        adapterTownList= new AdapterTownList(DatosMeteorologicosActivity.this, R.layout.activity_adapter_list, places);
-        listViewDatosMetereologicos.setAdapter(adapterTownList);
+        loadListFromServer();
+
+        adapter = new AdapterDataList(DatosMeteorologicosActivity.this, R.layout.activity_data_adapter_list, places);
+        listViewDatosMetereologicos.setAdapter(adapter);
 
         rearrageAdapter();
 
@@ -70,14 +72,14 @@ public class DatosMeteorologicosActivity extends AppCompatActivity {
     }
 
     private void rearrageAdapter(){
-        adapterTownList= new AdapterTownList(DatosMeteorologicosActivity.this, R.layout.activity_adapter_list, places);
-        listViewDatosMetereologicos.setAdapter(adapterTownList);
-        adapterTownList.notifyDataSetChanged();
+        adapter = new AdapterDataList(DatosMeteorologicosActivity.this, R.layout.activity_data_adapter_list, places);
+        listViewDatosMetereologicos.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void loadListFromServer(){
         // get the text message on the user and password
-        String messageSent = "36" + SEPARADOR;
+        String messageSent = "36" + SEPARADOR + areaName;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);

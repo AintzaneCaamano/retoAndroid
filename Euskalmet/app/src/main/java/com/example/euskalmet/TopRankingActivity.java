@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.euskalmet.adapters.AdapterTownList;
 import com.example.euskalmet.cliente.ClientThread;
@@ -18,6 +20,9 @@ public class TopRankingActivity extends AppCompatActivity {
 
     private ListView listViewTopRanking;
     private Button btnVolverFromRanking;
+    private RadioButton rbtnVizcaya;
+    private RadioButton rbtnGuip;
+    private RadioGroup radioGroup;
     private AdapterTownList adapterTownList;
     private ArrayList<String> places;
     private static final String SEPARADOR = "/////";
@@ -29,7 +34,7 @@ public class TopRankingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_ranking);
 
-        loadListFromServer();
+        loadListFromServer("Bizkaia");
 
         Bundle extras = getIntent().getExtras();
         user = extras.getString("user");
@@ -37,6 +42,11 @@ public class TopRankingActivity extends AppCompatActivity {
 
         listViewTopRanking = findViewById(R.id.listView_topRanking);
         btnVolverFromRanking = findViewById(R.id.btn_volverOperacionesFromRanking);
+
+        rbtnGuip = findViewById(R.id.rBtn_top_Gui);
+        rbtnVizcaya=findViewById(R.id.rBtn_top_Viz);
+        rbtnVizcaya.setChecked(true);
+        radioGroup = findViewById(R.id.rGroupTop);
 
         adapterTownList= new AdapterTownList(TopRankingActivity.this, R.layout.activity_adapter_list, places);
         listViewTopRanking.setAdapter(adapterTownList);
@@ -59,7 +69,7 @@ public class TopRankingActivity extends AppCompatActivity {
                 Intent intento = new Intent(getApplicationContext(), DetailEspacioNaturalActivity.class);
                 String place =listViewTopRanking.getItemAtPosition(position).toString();
                 intento.putExtra("place", place );
-                intento.putExtra("origen", "Espacio");
+                intento.putExtra("origen", "top");
                 intento.putExtra("user", user);
                 intento.putExtra("pass", String.valueOf(pass));
                 startActivity(intento);
@@ -68,15 +78,34 @@ public class TopRankingActivity extends AppCompatActivity {
 
     }
 
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rBtn_top_Gui:
+                if (checked)
+                    loadListFromServer("Gipuzkoa");
+                rearrageAdapter();
+                break;
+            case R.id.rBtn_top_Viz:
+                if (checked)
+                    loadListFromServer("Bizkaia");
+                rearrageAdapter();
+                break;
+        }
+    }
+
     private void rearrageAdapter(){
         adapterTownList= new AdapterTownList(TopRankingActivity.this, R.layout.activity_adapter_list, places);
         listViewTopRanking.setAdapter(adapterTownList);
         adapterTownList.notifyDataSetChanged();
     }
 
-    private void loadListFromServer(){
+    private void loadListFromServer(String territory){
         // get the text message on the user and password
-        String messageSent = "35"+SEPARADOR;
+        String messageSent = "35"+SEPARADOR + territory;
 
         ClientThread clientThread = new ClientThread();
         clientThread.setMessageSent(messageSent);
@@ -92,4 +121,6 @@ public class TopRankingActivity extends AppCompatActivity {
         // The Answer
         places = clientThread.getArrayStringResponse();
     }
+
+
 }

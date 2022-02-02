@@ -6,8 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.euskalmet.adapters.AdapterFotoList;
+import com.example.euskalmet.adapters.AdapterTownList;
 import com.example.euskalmet.cliente.ClientThread;
 
 import java.nio.charset.StandardCharsets;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Base64.Decoder;
 
 import android.util.Base64;
+import android.widget.ListView;
 
 
 public class GaleriaActivity extends AppCompatActivity {
@@ -24,12 +28,14 @@ public class GaleriaActivity extends AppCompatActivity {
     private  ArrayList<String> imgs;
     private String user;
     private int pass;
-
+    private AdapterFotoList adapter;
+    private GridView lw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-        foto1 = findViewById(R.id.imgV_Galeria1);
+        lw = findViewById(R.id.gridV_galeria);
+        //foto1 = findViewById(R.id.imgV_Galeria1);
 
         Bundle extras = getIntent().getExtras();
         String place = extras.getString("place");
@@ -37,10 +43,12 @@ public class GaleriaActivity extends AppCompatActivity {
         pass = Integer.parseInt(extras.getString("pass"));
 
         getImagefromServer(place);
-
+        adapter = new AdapterFotoList(GaleriaActivity.this, R.layout.activity_photo_adapter_list, imgs);
+        lw.setAdapter(adapter);
+/*
         for (int i = 0 ; i<imgs.size();i++){
             convertirImg(foto1,imgs.get(i).toString());
-        }
+        }*/
     }
 
     private void getImagefromServer(String place){
@@ -87,10 +95,4 @@ public class GaleriaActivity extends AppCompatActivity {
         /*foto1.setImageBitmap(bmp);*/
     }
 
-    private void convertirImg(ImageView foto1, String imgs){
-        byte[] img = imgs.getBytes(StandardCharsets.UTF_8);
-        byte[] decodedString = Base64.decode(img, Base64.NO_WRAP);
-        Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        foto1.setImageBitmap(bmp);
-    }
 }
